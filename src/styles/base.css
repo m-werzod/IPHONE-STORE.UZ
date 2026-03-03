@@ -1,2 +1,1 @@
-/* Why: prevent layout shift for modals/toasts on mobile Safari */
 body { -webkit-text-size-adjust: 100%; }

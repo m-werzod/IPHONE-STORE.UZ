@@ -6,25 +6,18 @@
  * =========================================================
  */
 const CATEGORIES = [
-  { id: "all", label: { en: "All", ru: "Р вЂ™РЎРѓР Вµ", uz: "Barchasi" } },
-  { id: "phones", label: { en: "Phones", ru: "Р СћР ВµР В»Р ВµРЎвЂћР С•Р Р…РЎвЂ№", uz: "Telefonlar" } },
+  { id: "all", label: { en: "All", ru: "Все", uz: "Barchasi" } },
+  { id: "phones", label: { en: "Phones", ru: "Телефоны", uz: "Telefonlar" } },
   { id: "airpods", label: { en: "AirPods", ru: "AirPods", uz: "AirPods" } },
-  { id: "wired", label: { en: "Wired earphones", ru: "Р СџРЎР‚Р С•Р Р†Р С•Р Т‘Р Р…РЎвЂ№Р Вµ", uz: "Simli quloqchin" } },
-  { id: "chargers", label: { en: "Chargers", ru: "Р вЂ”Р В°РЎР‚РЎРЏР Т‘Р С”Р С‘", uz: "Zaryadlovchi" } },
-  { id: "cables", label: { en: "Cables", ru: "Р С™Р В°Р В±Р ВµР В»Р С‘", uz: "Kabellar" } },
-  { id: "cases", label: { en: "Cases", ru: "Р В§Р ВµРЎвЂ¦Р В»РЎвЂ№", uz: "GРІР‚Вiloflar" } },
-  { id: "power", label: { en: "Power & MagSafe", ru: "Р СџР С‘РЎвЂљР В°Р Р…Р С‘Р Вµ/MagSafe", uz: "Quvvat/MagSafe" } },
-  { id: "sim", label: { en: "SIM & extras", ru: "SIM Р С‘ Р Т‘РЎР‚.", uz: "SIM va boshqa" } },
+  { id: "wired", label: { en: "Wired earphones", ru: "Проводные", uz: "Simli quloqchin" } },
+  { id: "chargers", label: { en: "Chargers", ru: "Зарядки", uz: "Zaryadlovchi" } },
+  { id: "cables", label: { en: "Cables", ru: "Кабели", uz: "Kabellar" } },
+  { id: "cases", label: { en: "Cases", ru: "Чехлы", uz: "G‘iloflar" } },
+  { id: "power", label: { en: "Power & MagSafe", ru: "Питание/MagSafe", uz: "Quvvat/MagSafe" } },
+  { id: "sim", label: { en: "SIM & extras", ru: "SIM и др.", uz: "SIM va boshqa" } },
 ];
 
-/**
- * =========================================================
- * PRODUCTS РІР‚вЂќ РІР‚Сљready to sellРІР‚Сњ demo catalog.
- * Replace prices/images with your real inventory (easy).
- *
- * Price is stored in UZS by default; USD view uses STORE.usdToUzs.
- * =========================================================
- */
+
 function svgPlaceholder(title, subtitle = "") {
   const safeT = encodeURIComponent(title);
   const safeS = encodeURIComponent(subtitle);
@@ -58,8 +51,8 @@ const PRODUCTS = [
     name: { en: "iPhone 17 Pro", ru: "iPhone 17 Pro", uz: "iPhone 17 Pro" },
     desc: {
       en: "Flagship performance, Pro camera features, premium build. (Set your real storage/variant pricing.)",
-      ru: "Р В¤Р В»Р В°Р С–Р СР В°Р Р…, Pro-Р С”Р В°Р СР ВµРЎР‚Р В°, Р С—РЎР‚Р ВµР СР С‘Р В°Р В»РЎРЉР Р…Р В°РЎРЏ РЎРѓР В±Р С•РЎР‚Р С”Р В°. (Р СџР С•РЎРѓРЎвЂљР В°Р Р†РЎРЉРЎвЂљР Вµ РЎвЂ Р ВµР Р…РЎвЂ№ Р С—Р С• Р С—Р В°Р СРЎРЏРЎвЂљР С‘/Р Р†Р В°РЎР‚Р С‘Р В°Р Р…РЎвЂљРЎС“.)",
-      uz: "Flagman, Pro kamera, premium dizayn. (Xotira/variant boРІР‚Вyicha narx qoРІР‚Вying.)",
+      ru: "Флагман, Pro-камера, премиальная сборка. (Поставьте цены по памяти/варианту.)",
+      uz: "Flagman, Pro kamera, premium dizayn. (Xotira/variant bo‘yicha narx qo‘ying.)",
     },
     priceUZS: 15999000,
     oldPriceUZS: 16999000,
@@ -76,7 +69,7 @@ const PRODUCTS = [
     name: { en: "iPhone 17", ru: "iPhone 17", uz: "iPhone 17" },
     desc: {
       en: "Best balance for most people. Great camera, battery, display.",
-      ru: "Р вЂєРЎС“РЎвЂЎРЎв‚¬Р С‘Р в„– Р В±Р В°Р В»Р В°Р Р…РЎРѓ. Р С™Р В°Р СР ВµРЎР‚Р В°, Р В±Р В°РЎвЂљР В°РЎР‚Р ВµРЎРЏ, Р Т‘Р С‘РЎРѓР С—Р В»Р ВµР в„–.",
+      ru: "Лучший баланс. Камера, батарея, дисплей.",
       uz: "Eng yaxshi balans. Kamera, batareya, ekran.",
     },
     priceUZS: 12999000,
@@ -94,7 +87,7 @@ const PRODUCTS = [
     name: { en: "iPhone Air", ru: "iPhone Air", uz: "iPhone Air" },
     desc: {
       en: "Lightweight design focus. Ideal for comfort and style.",
-      ru: "Р вЂєРЎвЂР С–Р С”Р С‘Р в„– Р С”Р С•РЎР‚Р С—РЎС“РЎРѓ. Р С™Р С•Р СРЎвЂћР С•РЎР‚РЎвЂљ Р С‘ РЎРѓРЎвЂљР С‘Р В»РЎРЉ.",
+      ru: "Лёгкий корпус. Комфорт и стиль.",
       uz: "Yengil dizayn. Qulay va chiroyli.",
     },
     priceUZS: 13999000,
@@ -112,7 +105,7 @@ const PRODUCTS = [
     name: { en: "iPhone 16", ru: "iPhone 16", uz: "iPhone 16" },
     desc: {
       en: "Reliable choice with great value. Perfect upgrade path.",
-      ru: "Р СњР В°Р Т‘РЎвЂР В¶Р Р…РЎвЂ№Р в„– Р Р†РЎвЂ№Р В±Р С•РЎР‚ Р С‘ РЎвЂ¦Р С•РЎР‚Р С•РЎв‚¬Р В°РЎРЏ РЎвЂ Р ВµР Р…Р В°.",
+      ru: "Надёжный выбор и хорошая цена.",
       uz: "Ishonchli tanlov va yaxshi narx.",
     },
     priceUZS: 10999000,
@@ -130,8 +123,8 @@ const PRODUCTS = [
     name: { en: "iPhone 16e", ru: "iPhone 16e", uz: "iPhone 16e" },
     desc: {
       en: "Budget-friendly Apple experience. Great for gifts and first iPhone.",
-      ru: "Р вЂќР С•РЎРѓРЎвЂљРЎС“Р С—Р Р…РЎвЂ№Р в„– iPhone. Р С›РЎвЂљР В»Р С‘РЎвЂЎР Р…Р С• Р Т‘Р В»РЎРЏ Р С—Р С•Р Т‘Р В°РЎР‚Р С”Р В°.",
-      uz: "Hamyonbop iPhone. SovgРІР‚Вa uchun zoРІР‚Вr.",
+      ru: "Доступный iPhone. Отлично для подарка.",
+      uz: "Hamyonbop iPhone. Sovg‘a uchun zo‘r.",
     },
     priceUZS: 8999000,
     oldPriceUZS: 9499000,
@@ -146,11 +139,11 @@ const PRODUCTS = [
   {
     id: "airpodspro3",
     category: "airpods",
-    name: { en: "AirPods Pro (3rd gen)", ru: "AirPods Pro (3-Р Вµ)", uz: "AirPods Pro (3-avlod)" },
+    name: { en: "AirPods Pro (3rd gen)", ru: "AirPods Pro (3-е)", uz: "AirPods Pro (3-avlod)" },
     desc: {
       en: "Premium ANC, adaptive audio, comfortable fit. Great for calls.",
-      ru: "Р СџРЎР‚Р ВµР СР С‘РЎС“Р С ANC, Р В°Р Т‘Р В°Р С—РЎвЂљР С‘Р Р†Р Р…РЎвЂ№Р в„– Р В·Р Р†РЎС“Р С”, РЎС“Р Т‘Р С•Р В±Р Р…Р С•. Р С›РЎвЂљР В»Р С‘РЎвЂЎР Р…Р С• Р Т‘Р В»РЎРЏ Р В·Р Р†Р С•Р Р…Р С”Р С•Р Р†.",
-      uz: "Premium ANC, moslashuvchan audio, qulay. QoРІР‚ВngРІР‚Вiroq uchun zoРІР‚Вr.",
+      ru: "Премиум ANC, адаптивный звук, удобно. Отлично для звонков.",
+      uz: "Premium ANC, moslashuvchan audio, qulay. Qo‘ng‘iroq uchun zo‘r.",
     },
     priceUZS: 3399000,
     oldPriceUZS: 3699000,
@@ -167,8 +160,8 @@ const PRODUCTS = [
     name: { en: "AirPods 4", ru: "AirPods 4", uz: "AirPods 4" },
     desc: {
       en: "Everyday wireless with great sound. Perfect for iPhone pairing.",
-      ru: "Р СњР В° Р С”Р В°Р В¶Р Т‘РЎвЂ№Р в„– Р Т‘Р ВµР Р…РЎРЉ. Р С›РЎвЂљР В»Р С‘РЎвЂЎР Р…Р В°РЎРЏ РЎРѓР Р†РЎРЏР В·Р С”Р В° РЎРѓ iPhone.",
-      uz: "Har kuni uchun. iPhone bilan zoРІР‚Вr ishlaydi.",
+      ru: "На каждый день. Отличная связка с iPhone.",
+      uz: "Har kuni uchun. iPhone bilan zo‘r ishlaydi.",
     },
     priceUZS: 2399000,
     oldPriceUZS: 2599000,
@@ -185,7 +178,7 @@ const PRODUCTS = [
     name: { en: "AirPods Max", ru: "AirPods Max", uz: "AirPods Max" },
     desc: {
       en: "Over-ear premium sound + noise cancellation. Luxury listening.",
-      ru: "Р СџРЎР‚Р ВµР СР С‘Р В°Р В»РЎРЉР Р…РЎвЂ№Р Вµ Р С—Р С•Р В»Р Р…Р С•РЎР‚Р В°Р В·Р СР ВµРЎР‚Р Р…РЎвЂ№Р Вµ РЎРѓ РЎв‚¬РЎС“Р СР С•Р С—Р С•Р Т‘Р В°Р Р†Р В»Р ВµР Р…Р С‘Р ВµР С.",
+      ru: "Премиальные полноразмерные с шумоподавлением.",
       uz: "Katta quloqchin, premium tovush + ANC.",
     },
     priceUZS: 7999000,
@@ -205,8 +198,8 @@ const PRODUCTS = [
     name: { en: "EarPods (USB-C)", ru: "EarPods (USB-C)", uz: "EarPods (USB-C)" },
     desc: {
       en: "Wired, stable mic quality. Great for calls and lectures.",
-      ru: "Р СџРЎР‚Р С•Р Р†Р С•Р Т‘Р Р…РЎвЂ№Р Вµ, РЎРѓРЎвЂљР В°Р В±Р С‘Р В»РЎРЉР Р…РЎвЂ№Р в„– Р СР С‘Р С”РЎР‚Р С•РЎвЂћР С•Р Р…. Р вЂќР В»РЎРЏ Р В·Р Р†Р С•Р Р…Р С”Р С•Р Р†/РЎС“РЎР‚Р С•Р С”Р С•Р Р†.",
-      uz: "Simli, mikrofon barqaror. QoРІР‚ВngРІР‚Вiroq/dars uchun.",
+      ru: "Проводные, стабильный микрофон. Для звонков/уроков.",
+      uz: "Simli, mikrofon barqaror. Qo‘ng‘iroq/dars uchun.",
     },
     priceUZS: 249000,
     oldPriceUZS: 299000,
@@ -223,7 +216,7 @@ const PRODUCTS = [
     name: { en: "EarPods (Lightning)", ru: "EarPods (Lightning)", uz: "EarPods (Lightning)" },
     desc: {
       en: "For Lightning iPhones. Clean sound, easy plug & play.",
-      ru: "Р вЂќР В»РЎРЏ Lightning iPhone. Р В§Р С‘РЎРѓРЎвЂљРЎвЂ№Р в„– Р В·Р Р†РЎС“Р С”, Р С—РЎР‚Р С•РЎРѓРЎвЂљР С•.",
+      ru: "Для Lightning iPhone. Чистый звук, просто.",
       uz: "Lightning iPhone uchun. Tovush toza, oson.",
     },
     priceUZS: 249000,
@@ -240,10 +233,10 @@ const PRODUCTS = [
   {
     id: "apple-20w",
     category: "chargers",
-    name: { en: "Apple 20W USB-C Power Adapter", ru: "Apple Р В°Р Т‘Р В°Р С—РЎвЂљР ВµРЎР‚ 20W USB-C", uz: "Apple 20W USB-C adapter" },
+    name: { en: "Apple 20W USB-C Power Adapter", ru: "Apple адаптер 20W USB-C", uz: "Apple 20W USB-C adapter" },
     desc: {
       en: "Fast and safe charging for iPhone. Recommended base adapter.",
-      ru: "Р вЂРЎвЂ№РЎРѓРЎвЂљРЎР‚Р В°РЎРЏ Р С‘ Р В±Р ВµР В·Р С•Р С—Р В°РЎРѓР Р…Р В°РЎРЏ Р В·Р В°РЎР‚РЎРЏР Т‘Р С”Р В° iPhone. Р вЂР В°Р В·Р В°.",
+      ru: "Быстрая и безопасная зарядка iPhone. База.",
       uz: "Tez va xavfsiz zaryad. Asosiy adapter.",
     },
     priceUZS: 399000,
@@ -261,7 +254,7 @@ const PRODUCTS = [
     name: { en: "Apple 35W Dual USB-C", ru: "Apple 35W Dual USB-C", uz: "Apple 35W Dual USB-C" },
     desc: {
       en: "Charge two devices at once. Great for iPhone + AirPods.",
-      ru: "Р вЂќР Р†Р В° РЎС“РЎРѓРЎвЂљРЎР‚Р С•Р в„–РЎРѓРЎвЂљР Р†Р В° Р С•Р Т‘Р Р…Р С•Р Р†РЎР‚Р ВµР СР ВµР Р…Р Р…Р С•. Р Р€Р Т‘Р С•Р В±Р Р…Р С•.",
+      ru: "Два устройства одновременно. Удобно.",
       uz: "Bir vaqtda 2 ta qurilma. Qulay.",
     },
     priceUZS: 899000,
@@ -276,10 +269,10 @@ const PRODUCTS = [
   {
     id: "anker-gan-65",
     category: "chargers",
-    name: { en: "Anker GaN 65W (2РІР‚вЂњ3 ports)", ru: "Anker GaN 65W (2РІР‚вЂњ3 Р С—Р С•РЎР‚РЎвЂљР В°)", uz: "Anker GaN 65W (2РІР‚вЂњ3 port)" },
+    name: { en: "Anker GaN 65W (2–3 ports)", ru: "Anker GaN 65W (2–3 порта)", uz: "Anker GaN 65W (2–3 port)" },
     desc: {
       en: "Compact power for iPhone, iPad, MacBook Air. Top seller.",
-      ru: "Р С™Р С•Р СР С—Р В°Р С”РЎвЂљР Р…Р С•: iPhone/iPad/MacBook Air. Р ТђР С‘РЎвЂљ.",
+      ru: "Компактно: iPhone/iPad/MacBook Air. Хит.",
       uz: "Ixcham: iPhone/iPad/MacBook Air. Top.",
     },
     priceUZS: 649000,
@@ -296,10 +289,10 @@ const PRODUCTS = [
   {
     id: "cable-usbc-lightning",
     category: "cables",
-    name: { en: "USB-C РІвЂ вЂќ Lightning cable (1m)", ru: "USB-C РІвЂ вЂќ Lightning (1Р С)", uz: "USB-C РІвЂ вЂќ Lightning (1m)" },
+    name: { en: "USB-C ↔ Lightning cable (1m)", ru: "USB-C ↔ Lightning (1м)", uz: "USB-C ↔ Lightning (1m)" },
     desc: {
       en: "For Lightning iPhones. Fast charging with 20W adapter.",
-      ru: "Р вЂќР В»РЎРЏ Lightning iPhone. Р вЂРЎвЂ№РЎРѓРЎвЂљРЎР‚Р В°РЎРЏ Р В·Р В°РЎР‚РЎРЏР Т‘Р С”Р В° РЎРѓ 20W.",
+      ru: "Для Lightning iPhone. Быстрая зарядка с 20W.",
       uz: "Lightning iPhone uchun. 20W bilan tez.",
     },
     priceUZS: 199000,
@@ -314,10 +307,10 @@ const PRODUCTS = [
   {
     id: "cable-usbc-usbc",
     category: "cables",
-    name: { en: "USB-C РІвЂ вЂќ USB-C cable (2m)", ru: "USB-C РІвЂ вЂќ USB-C (2Р С)", uz: "USB-C РІвЂ вЂќ USB-C (2m)" },
+    name: { en: "USB-C ↔ USB-C cable (2m)", ru: "USB-C ↔ USB-C (2м)", uz: "USB-C ↔ USB-C (2m)" },
     desc: {
       en: "For iPhone (USB-C), iPad, power banks, laptop charging.",
-      ru: "Р вЂќР В»РЎРЏ iPhone (USB-C), iPad, Р С—Р В°Р Р†Р ВµРЎР‚Р В±Р В°Р Р…Р С”Р С•Р Р†, Р Р…Р С•РЎС“РЎвЂљР В±РЎС“Р С”Р С•Р Р†.",
+      ru: "Для iPhone (USB-C), iPad, павербанков, ноутбуков.",
       uz: "iPhone (USB-C), iPad, powerbank, noutbuk uchun.",
     },
     priceUZS: 189000,
@@ -334,8 +327,8 @@ const PRODUCTS = [
   {
     id: "case-17pro-silicone",
     category: "cases",
-    name: { en: "Silicone case РІР‚вЂќ iPhone 17 Pro", ru: "Р РЋР С‘Р В»Р С‘Р С”Р С•Р Р…Р С•Р Р†РЎвЂ№Р в„– РЎвЂЎР ВµРЎвЂ¦Р С•Р В» РІР‚вЂќ iPhone 17 Pro", uz: "Silikon gРІР‚Вilof РІР‚вЂќ iPhone 17 Pro" },
-    desc: { en: "Soft touch, camera protection, slim fit.", ru: "Р СљРЎРЏР С–Р С”Р С‘Р в„–, Р В·Р В°РЎвЂ°Р С‘РЎвЂљР В° Р С”Р В°Р СР ВµРЎР‚РЎвЂ№, РЎвЂљР С•Р Р…Р С”Р С‘Р в„–.", uz: "Yumshoq, kamera himoyasi, yupqa." },
+    name: { en: "Silicone case — iPhone 17 Pro", ru: "Силиконовый чехол — iPhone 17 Pro", uz: "Silikon g‘ilof — iPhone 17 Pro" },
+    desc: { en: "Soft touch, camera protection, slim fit.", ru: "Мягкий, защита камеры, тонкий.", uz: "Yumshoq, kamera himoyasi, yupqa." },
     priceUZS: 249000,
     oldPriceUZS: 299000,
     tags: ["case", "silicone"],
@@ -348,8 +341,8 @@ const PRODUCTS = [
   {
     id: "case-16-clear",
     category: "cases",
-    name: { en: "Clear case РІР‚вЂќ iPhone 16", ru: "Р СџРЎР‚Р С•Р В·РЎР‚Р В°РЎвЂЎР Р…РЎвЂ№Р в„– РЎвЂЎР ВµРЎвЂ¦Р С•Р В» РІР‚вЂќ iPhone 16", uz: "Shaffof gРІР‚Вilof РІР‚вЂќ iPhone 16" },
-    desc: { en: "Minimal look, scratch resistant.", ru: "Р СљР С‘Р Р…Р С‘Р СР В°Р В»Р С‘Р В·Р С, Р В·Р В°РЎвЂ°Р С‘РЎвЂљР В° Р С•РЎвЂљ РЎвЂ Р В°РЎР‚Р В°Р С—Р С‘Р Р….", uz: "Minimal, tirnalishga chidamli." },
+    name: { en: "Clear case — iPhone 16", ru: "Прозрачный чехол — iPhone 16", uz: "Shaffof g‘ilof — iPhone 16" },
+    desc: { en: "Minimal look, scratch resistant.", ru: "Минимализм, защита от царапин.", uz: "Minimal, tirnalishga chidamli." },
     priceUZS: 219000,
     oldPriceUZS: 269000,
     tags: ["case", "clear"],
@@ -364,8 +357,8 @@ const PRODUCTS = [
   {
     id: "magsafe-charger",
     category: "power",
-    name: { en: "MagSafe Charger", ru: "MagSafe Р В·Р В°РЎР‚РЎРЏР Т‘Р С”Р В°", uz: "MagSafe zaryadlovchi" },
-    desc: { en: "Magnetic wireless charging. Perfect for MagSafe cases.", ru: "Р СљР В°Р С–Р Р…Р С‘РЎвЂљР Р…Р В°РЎРЏ Р В±Р ВµРЎРѓР С—РЎР‚Р С•Р Р†Р С•Р Т‘Р Р…Р В°РЎРЏ Р В·Р В°РЎР‚РЎРЏР Т‘Р С”Р В°.", uz: "Magnitli simsiz zaryad." },
+    name: { en: "MagSafe Charger", ru: "MagSafe зарядка", uz: "MagSafe zaryadlovchi" },
+    desc: { en: "Magnetic wireless charging. Perfect for MagSafe cases.", ru: "Магнитная беспроводная зарядка.", uz: "Magnitli simsiz zaryad." },
     priceUZS: 499000,
     oldPriceUZS: 549000,
     tags: ["magsafe", "wireless", "charger"],
@@ -381,7 +374,7 @@ const PRODUCTS = [
     name: { en: "MagSafe power bank 10,000mAh", ru: "MagSafe power bank 10,000mAh", uz: "MagSafe powerbank 10,000mAh" },
     desc: {
       en: "Snap-on battery for travel. Strong magnets + USB-C input/output.",
-      ru: "Р Р€Р Т‘Р С•Р В±Р Р…Р С• Р Р† Р Т‘Р С•РЎР‚Р С•Р С–Р Вµ. Р СљР В°Р С–Р Р…Р С‘РЎвЂљРЎвЂ№ + USB-C Р Р†РЎвЂ¦Р С•Р Т‘/Р Р†РЎвЂ№РЎвЂ¦Р С•Р Т‘.",
+      ru: "Удобно в дороге. Магниты + USB-C вход/выход.",
       uz: "Sayohat uchun qulay. Magnit + USB-C kirish/chiqish.",
     },
     priceUZS: 699000,
@@ -398,11 +391,11 @@ const PRODUCTS = [
   {
     id: "esim-setup",
     category: "sim",
-    name: { en: "eSIM setup service", ru: "Р Р€РЎРѓР В»РЎС“Р С–Р В°: Р Р…Р В°РЎРѓРЎвЂљРЎР‚Р С•Р в„–Р С”Р В° eSIM", uz: "Xizmat: eSIM sozlash" },
+    name: { en: "eSIM setup service", ru: "Услуга: настройка eSIM", uz: "Xizmat: eSIM sozlash" },
     desc: {
       en: "We help activate, transfer, and configure eSIM on your iPhone.",
-      ru: "Р СџР С•Р СР С•Р В¶Р ВµР С Р В°Р С”РЎвЂљР С‘Р Р†Р С‘РЎР‚Р С•Р Р†Р В°РЎвЂљРЎРЉ/Р С—Р ВµРЎР‚Р ВµР Р…Р ВµРЎРѓРЎвЂљР С‘ Р С‘ Р Р…Р В°РЎРѓРЎвЂљРЎР‚Р С•Р С‘РЎвЂљРЎРЉ eSIM.",
-      uz: "eSIMni yoqish/koРІР‚Вchirish va sozlashga yordam beramiz.",
+      ru: "Поможем активировать/перенести и настроить eSIM.",
+      uz: "eSIMni yoqish/ko‘chirish va sozlashga yordam beramiz.",
     },
     priceUZS: 99000,
     oldPriceUZS: 129000,
@@ -416,8 +409,8 @@ const PRODUCTS = [
   {
     id: "screen-protector",
     category: "sim",
-    name: { en: "Tempered glass (premium)", ru: "Р РЋРЎвЂљР ВµР С”Р В»Р С• (Р С—РЎР‚Р ВµР СР С‘РЎС“Р С)", uz: "Himoya oynasi (premium)" },
-    desc: { en: "Anti-scratch, smooth touch, high clarity.", ru: "Р С›РЎвЂљ РЎвЂ Р В°РЎР‚Р В°Р С—Р С‘Р Р…, Р С—Р В»Р В°Р Р†Р Р…Р С•Р Вµ Р С”Р В°РЎРѓР В°Р Р…Р С‘Р Вµ.", uz: "Tirnalishga qarshi, silliq." },
+    name: { en: "Tempered glass (premium)", ru: "Стекло (премиум)", uz: "Himoya oynasi (premium)" },
+    desc: { en: "Anti-scratch, smooth touch, high clarity.", ru: "От царапин, плавное касание.", uz: "Tirnalishga qarshi, silliq." },
     priceUZS: 99000,
     oldPriceUZS: 129000,
     tags: ["glass", "protector"],

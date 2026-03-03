@@ -1,10 +1,4 @@
 "use strict";
-
-/**
- * =========================================================
- * EVENTS
- * =========================================================
- */
 function bindEvents() {
   // Theme
   $("#btnTheme").addEventListener("click", () => setTheme(state.theme === "dark" ? "light" : "dark"));
@@ -205,7 +199,7 @@ function bindEvents() {
 
           <div class="mt-4 flex items-center gap-2">
             <button class="btnAdd inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-zinc-900 px-4 py-3 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50 dark:bg-white dark:text-zinc-900" data-id="${escapeHtml(p.id)}" ${p.stock <= 0 ? "disabled" : ""}>
-              ${ICONS.plus}<span>${escapeHtml(t("add"))}${qty ? ` вЂў ${qty}` : ""}</span>
+              ${ICONS.plus}<span>${escapeHtml(t("add"))}${qty ? ` • ${qty}` : ""}</span>
             </button>
             <button class="btnDetails inline-flex items-center justify-center rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-900" data-id="${escapeHtml(p.id)}">
               <span>${escapeHtml(t("details"))}</span>

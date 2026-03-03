@@ -1,10 +1,5 @@
 "use strict";
 
-/**
- * =========================================================
- * MODALS
- * =========================================================
- */
 function openProductModal(productId) {
   const p = PRODUCTS.find((x) => x.id === productId);
   if (!p) return;

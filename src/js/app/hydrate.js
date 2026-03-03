@@ -1,10 +1,4 @@
 "use strict";
-
-/**
- * =========================================================
- * TEXT HYDRATION
- * =========================================================
- */
 function hydrateText() {
   // Banner + nav
   $("#bannerText").textContent = t("banner");
@@ -72,7 +66,7 @@ function hydrateText() {
   $("#locationSubtitle").textContent = t("locationSubtitle");
   $("#locationName").textContent = STORE.locationName[state.lang] || STORE.locationName.en;
   $("#locationAddress").textContent = STORE.address[state.lang] || STORE.address.en;
-  $("#locationHoursTitle").textContent = { en: "Hours", ru: "Р§Р°СЃС‹", uz: "Vaqt" }[state.lang] || "Hours";
+  $("#locationHoursTitle").textContent = { en: "Hours", ru: "Часы", uz: "Vaqt" }[state.lang] || "Hours";
   $("#locationHours").textContent = STORE.hours[state.lang] || STORE.hours.en;
   $("#openMapsLabel").textContent = t("openMaps");
   $("#telegramLabel").textContent = t("telegram");
@@ -117,7 +111,7 @@ function hydrateText() {
   $("#footerPhone").href = `tel:${STORE.phoneE164}`;
 
   // Search placeholders
-  $("#searchInput").placeholder = state.lang === "ru" ? "РџРѕРёСЃРє С‚РѕРІР°СЂРѕРІвЂ¦" : state.lang === "uz" ? "Mahsulot qidirishвЂ¦" : "Search productsвЂ¦";
+  $("#searchInput").placeholder = state.lang === "ru" ? "Поиск товаров…" : state.lang === "uz" ? "Mahsulot qidirish…" : "Search products…";
   $("#searchInputMobile").placeholder = $("#searchInput").placeholder;
 
   // Icons

@@ -1,10 +1,4 @@
 "use strict";
-
-/**
- * =========================================================
- * HELPERS
- * =========================================================
- */
 function t(key, ...args) {
   const dict = I18N[state.lang] || I18N.en;
   const val = dict[key];
@@ -101,12 +95,12 @@ function escapeHtml(s) {
 
 function buildOrderMessage(itemsUZS, context) {
   const lines = [];
-  lines.push(`рџ›’ ${STORE.name} вЂ” Order`);
-  lines.push(`рџ“Ќ ${STORE.address.en}`);
+  lines.push(`🛒 ${STORE.name} — Order`);
+  lines.push(`📍 ${STORE.address.en}`);
   lines.push("");
   lines.push("Items:");
   for (const it of itemsUZS) {
-    lines.push(`вЂў ${it.name} Г—${it.qty} вЂ” ${formatMoneyUZS(it.priceUZS)} each`);
+    lines.push(`• ${it.name} ×${it.qty} — ${formatMoneyUZS(it.priceUZS)} each`);
   }
   lines.push("");
   const total = itemsUZS.reduce((s, x) => s + x.priceUZS * x.qty, 0);
