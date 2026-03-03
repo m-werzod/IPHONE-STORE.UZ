@@ -1,0 +1,55 @@
+<!-- Location -->
+      <section id="location" class="scroll-mt-28 py-12">
+        <div class="grid gap-6 lg:grid-cols-2">
+          <div class="rounded-[2rem] border border-zinc-200 bg-white p-6 shadow-soft dark:border-zinc-800 dark:bg-zinc-900">
+            <h2 class="text-2xl font-semibold tracking-tight md:text-3xl" id="locationTitle"></h2>
+            <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300" id="locationSubtitle"></p>
+
+            <div class="mt-5 grid gap-3 text-sm">
+              <div class="flex items-start gap-3">
+                <div class="mt-0.5 rounded-xl border border-zinc-200 bg-white p-2 dark:border-zinc-800 dark:bg-zinc-950">📍</div>
+                <div>
+                  <div class="font-semibold" id="locationName"></div>
+                  <div class="text-zinc-600 dark:text-zinc-400" id="locationAddress"></div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="mt-0.5 rounded-xl border border-zinc-200 bg-white p-2 dark:border-zinc-800 dark:bg-zinc-950">🕘</div>
+                <div>
+                  <div class="font-semibold" id="locationHoursTitle"></div>
+                  <div class="text-zinc-600 dark:text-zinc-400" id="locationHours"></div>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <a id="btnOpenMaps" class="inline-flex items-center justify-center gap-2 rounded-2xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white hover:opacity-90 dark:bg-white dark:text-zinc-900" href="#" target="_blank" rel="noreferrer">
+                  <span id="iconMap"></span><span id="openMapsLabel"></span>
+                </a>
+                <a id="btnTelegram" class="inline-flex items-center justify-center gap-2 rounded-2xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-900" href="#" target="_blank" rel="noreferrer">
+                  <span id="iconTelegram"></span><span id="telegramLabel"></span>
+                </a>
+                <a id="btnInstagram" class="inline-flex items-center justify-center gap-2 rounded-2xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-900" href="#" target="_blank" rel="noreferrer">
+                  <span id="iconInstagram"></span><span id="instagramLabel"></span>
+                </a>
+                <a id="btnPhone" class="inline-flex items-center justify-center gap-2 rounded-2xl border border-zinc-200 bg-white px-5 py-3 text-sm font-semibold hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-900" href="#">
+                  <span id="iconPhone2"></span><span id="phoneLabel"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-soft dark:border-zinc-800 dark:bg-zinc-900">
+            <!-- OpenStreetMap embed (no API key) -->
+            <iframe
+              id="osmMap"
+              title="Map"
+              class="h-[420px] w-full"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=69.240%2C41.300%2C69.280%2C41.330&layer=mapnik"
+            ></iframe>
+            <div class="border-t border-zinc-200 bg-zinc-50 px-5 py-3 text-xs text-zinc-600 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400" id="mapFootnote"></div>
+          </div>
+        </div>
+      </section>

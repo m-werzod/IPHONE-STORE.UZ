@@ -1,0 +1,1736 @@
+"use strict";
+
+/**
+ * =========================================================
+ * CONFIG — EDIT THESE FOR YOUR REAL STORE
+ * =========================================================
+ */
+const STORE = {
+  name: "Malika Apple Store",
+  tagline: { en: "iPhone • AirPods • Accessories", ru: "iPhone • AirPods • Аксессуары", uz: "iPhone • AirPods • Aksessuarlar" },
+
+  // Contacts (edit to your real accounts)
+  phoneDisplay: "+998 90 000 00 00",
+  phoneE164: "+998900000000",
+  telegramUsername: "your_shop_username",
+  instagramUrl: "https://instagram.com/your_shop_profile",
+
+  // Location
+  locationName: { en: "Tashkent — Malika (Apple rows)", ru: "Ташкент — Малика (ряды Apple)", uz: "Toshkent — Malika (Apple qatori)" },
+  address: { en: "Malika Bazaar, Tashkent, Uzbekistan", ru: "Рынок Малика, Ташкент, Узбекистан", uz: "Malika bozori, Toshkent, Oʻzbekiston" },
+  hours: { en: "Daily 10:00–20:00", ru: "Ежедневно 10:00–20:00", uz: "Har kuni 10:00–20:00" },
+  mapsUrl: "https://www.openstreetmap.org/#map=16/41.315/69.260",
+
+  // Currency
+  usdToUzs: 12600, // Change anytime. Used only when viewing USD prices converted to UZS or vice versa.
+};
+
+/**
+ * =========================================================
+ * I18N
+ * =========================================================
+ */
+const I18N = {
+  en: {
+    banner: "Fast order via Telegram • Delivery in Tashkent • Warranty options",
+    cart: "Cart",
+    wishlist: "Wishlist",
+    products: "Products",
+    services: "Services",
+    location: "Location",
+    faq: "FAQ",
+    heroPill: "Premium Apple store experience in Malika",
+    heroTitle: "Buy iPhone, AirPods, chargers & accessories — fast, safe, professional.",
+    heroSubtitle: "Search any product, compare, add to cart, and send your order instantly via Telegram/Instagram/phone call.",
+    shopNow: "Shop products",
+    quickOrder: "Quick order",
+    callNow: "Call now",
+    trust1Title: "Original & quality",
+    trust1Desc: "Trusted brands + проверка",
+    trust2Title: "Delivery",
+    trust2Desc: "Tashkent same-day options",
+    trust3Title: "Support",
+    trust3Desc: "Setup, transfer, консультация",
+    trust4Title: "Payments",
+    trust4Desc: "Cash / card / transfer",
+    heroCardKicker: "Today’s highlights",
+    heroCardTitle: "New arrivals + top deals",
+    heroStat1Label: "Products",
+    heroStat2Label: "Categories",
+    heroDealTitle: "Hot deal",
+    heroDealBadge: "-10% today",
+    heroDealDesc: "Add items to cart and send order in one click.",
+    heroDealBtn: "Open catalog",
+    heroFootnote: "Tip: Replace product photos/prices in the PRODUCTS array anytime. Everything updates automatically.",
+    productsTitle: "Catalog",
+    productsSubtitle: "Phones • Chargers • Earphones (wired/wireless) • AirPods • Cases • Cables • Power",
+    sort: "Sort",
+    featured: "Featured",
+    newest: "New",
+    priceAsc: "Price: low → high",
+    priceDesc: "Price: high → low",
+    reset: "Reset",
+    results: (n) => `${n} item(s)`,
+    compactOn: "Compact view: ON",
+    compactOff: "Compact view: OFF",
+    emptyTitle: "Nothing found",
+    emptyDesc: "Try another search or reset filters.",
+    emptyReset: "Reset filters",
+    add: "Add to cart",
+    details: "Details",
+    inStock: "In stock",
+    lowStock: "Low stock",
+    outOfStock: "Out of stock",
+    price: "Price",
+    orderTitle: "Order / Contact",
+    orderTelegram: "Order in Telegram",
+    orderInstagram: "Open Instagram",
+    orderPhone: "Call store",
+    orderHint: "Telegram message will include product name + price + quantity.",
+    cartTitle: "Your cart",
+    cartSubtitle: "Review items and send order",
+    cartEmpty: "Your cart is empty.",
+    cartTotal: "Total",
+    remove: "Remove",
+    qty: "Qty",
+    checkoutTelegram: "Send order to Telegram",
+    checkoutInstagram: "Instagram",
+    checkoutPhone: "Call",
+    checkoutHint: "No payment online here — we confirm availability, price, delivery, and warranty in chat.",
+    servicesTitle: "Services",
+    servicesSubtitle: "Like top foreign web stores — professional support from selection to setup.",
+    brandsTitle: "Brands",
+    brandsSubtitle: "Original Apple + trusted accessory brands.",
+    locationTitle: "Store location",
+    locationSubtitle: "Come to Malika or order online — we respond fast.",
+    openMaps: "Open in Maps",
+    telegram: "Telegram",
+    instagram: "Instagram",
+    phone: "Phone",
+    mapFootnote: "Map is approximate. Use “Open in Maps” for navigation.",
+    faqTitle: "FAQ",
+    faqSubtitle: "Quick answers customers usually ask.",
+    footerDesc: "Professional storefront template (Tailwind + JS). Replace contacts/products and start selling.",
+    footerLinks: "Sections",
+    footerContact: "Contact",
+    legal: "Prices are sample. Update to your real prices. Product names/logos belong to their owners.",
+    toastAdded: "Added to cart",
+    toastRemoved: "Removed",
+    toastWishAdded: "Added to wishlist",
+    toastWishRemoved: "Removed from wishlist",
+    toastCleared: "Filters reset",
+  },
+  ru: {
+    banner: "Быстрый заказ через Telegram • Доставка по Ташкенту • Гарантия",
+    cart: "Корзина",
+    wishlist: "Избранное",
+    products: "Каталог",
+    services: "Сервисы",
+    location: "Локация",
+    faq: "FAQ",
+    heroPill: "Премиум Apple-магазин на Малика",
+    heroTitle: "iPhone, AirPods, зарядки и аксессуары — быстро, безопасно, профессионально.",
+    heroSubtitle: "Найдите товар, добавьте в корзину и отправьте заказ в 1 клик через Telegram/Instagram/звонок.",
+    shopNow: "Открыть каталог",
+    quickOrder: "Быстрый заказ",
+    callNow: "Позвонить",
+    trust1Title: "Оригинал и качество",
+    trust1Desc: "Проверка + бренды",
+    trust2Title: "Доставка",
+    trust2Desc: "По Ташкенту — быстро",
+    trust3Title: "Поддержка",
+    trust3Desc: "Перенос/настройка",
+    trust4Title: "Оплата",
+    trust4Desc: "Нал/карта/перевод",
+    heroCardKicker: "Сегодня",
+    heroCardTitle: "Новинки + топ предложения",
+    heroStat1Label: "Товаров",
+    heroStat2Label: "Категорий",
+    heroDealTitle: "Горячее",
+    heroDealBadge: "-10% сегодня",
+    heroDealDesc: "Соберите корзину и отправьте заказ одним кликом.",
+    heroDealBtn: "Открыть каталог",
+    heroFootnote: "Совет: Замените фото/цены в массиве PRODUCTS — сайт обновится автоматически.",
+    productsTitle: "Каталог",
+    productsSubtitle: "Телефоны • Зарядки • Наушники (провод/беспровод) • AirPods • Чехлы • Кабели • Питание",
+    sort: "Сортировка",
+    featured: "Рекомендуем",
+    newest: "Новинки",
+    priceAsc: "Цена: по возрастанию",
+    priceDesc: "Цена: по убыванию",
+    reset: "Сброс",
+    results: (n) => `${n} товар(ов)`,
+    compactOn: "Компактно: ВКЛ",
+    compactOff: "Компактно: ВЫКЛ",
+    emptyTitle: "Ничего не найдено",
+    emptyDesc: "Измените запрос или сбросьте фильтры.",
+    emptyReset: "Сбросить фильтры",
+    add: "В корзину",
+    details: "Подробнее",
+    inStock: "В наличии",
+    lowStock: "Мало",
+    outOfStock: "Нет",
+    price: "Цена",
+    orderTitle: "Заказ / Связь",
+    orderTelegram: "Заказать в Telegram",
+    orderInstagram: "Открыть Instagram",
+    orderPhone: "Позвонить",
+    orderHint: "Сообщение Telegram содержит товар + цена + количество.",
+    cartTitle: "Корзина",
+    cartSubtitle: "Проверьте и отправьте заказ",
+    cartEmpty: "Корзина пуста.",
+    cartTotal: "Итого",
+    remove: "Удалить",
+    qty: "Кол-во",
+    checkoutTelegram: "Отправить заказ в Telegram",
+    checkoutInstagram: "Instagram",
+    checkoutPhone: "Звонок",
+    checkoutHint: "Онлайн-оплаты здесь нет — подтверждаем наличие, цену, доставку и гарантию в чате.",
+    servicesTitle: "Сервисы",
+    servicesSubtitle: "Как в зарубежных магазинах — профессионально от выбора до настройки.",
+    brandsTitle: "Бренды",
+    brandsSubtitle: "Apple + надёжные бренды аксессуаров.",
+    locationTitle: "Где мы",
+    locationSubtitle: "Малика или онлайн-заказ — отвечаем быстро.",
+    openMaps: "Открыть карту",
+    telegram: "Telegram",
+    instagram: "Instagram",
+    phone: "Телефон",
+    mapFootnote: "Карта приблизительная. Нажмите «Открыть карту» для маршрута.",
+    faqTitle: "FAQ",
+    faqSubtitle: "Коротко по самым частым вопросам.",
+    footerDesc: "Профессиональный шаблон витрины (Tailwind + JS). Замените контакты/товары и продавайте.",
+    footerLinks: "Разделы",
+    footerContact: "Контакты",
+    legal: "Цены примерные. Поставьте свои реальные цены. Права на бренды принадлежат владельцам.",
+    toastAdded: "Добавлено в корзину",
+    toastRemoved: "Удалено",
+    toastWishAdded: "Добавлено в избранное",
+    toastWishRemoved: "Убрано из избранного",
+    toastCleared: "Фильтры сброшены",
+  },
+  uz: {
+    banner: "Telegram orqali tez buyurtma • Toshkent bo‘ylab yetkazish • Kafolat",
+    cart: "Savat",
+    wishlist: "Sevimlilar",
+    products: "Katalog",
+    services: "Xizmatlar",
+    location: "Manzil",
+    faq: "FAQ",
+    heroPill: "Malikadagi premium Apple do‘koni",
+    heroTitle: "iPhone, AirPods, zaryadlovchi va aksessuarlar — tez, xavfsiz, professional.",
+    heroSubtitle: "Mahsulotni qidiring, savatga qo‘shing va buyurtmani Telegram/Instagram/qo‘ng‘iroq orqali yuboring.",
+    shopNow: "Katalog",
+    quickOrder: "Tez buyurtma",
+    callNow: "Qo‘ng‘iroq",
+    trust1Title: "Original va sifat",
+    trust1Desc: "Tekshiruv + brendlar",
+    trust2Title: "Yetkazish",
+    trust2Desc: "Toshkentda tez",
+    trust3Title: "Yordam",
+    trust3Desc: "Sozlash/ko‘chirish",
+    trust4Title: "To‘lov",
+    trust4Desc: "Naqd/karta/o‘tkazma",
+    heroCardKicker: "Bugun",
+    heroCardTitle: "Yangi + top takliflar",
+    heroStat1Label: "Mahsulot",
+    heroStat2Label: "Kategoriya",
+    heroDealTitle: "Aksiya",
+    heroDealBadge: "-10% bugun",
+    heroDealDesc: "Savatni to‘ldiring va 1 bosishda yuboring.",
+    heroDealBtn: "Katalogni ochish",
+    heroFootnote: "Maslahat: PRODUCTS ichida rasm/narxlarni almashtiring — sayt o‘zi yangilanadi.",
+    productsTitle: "Katalog",
+    productsSubtitle: "Telefon • Zaryadka • Quloqchin (simli/simsiz) • AirPods • G‘ilof • Kabel • Quvvat",
+    sort: "Saralash",
+    featured: "Tavsiya",
+    newest: "Yangi",
+    priceAsc: "Narx: arzon → qimmat",
+    priceDesc: "Narx: qimmat → arzon",
+    reset: "Tozalash",
+    results: (n) => `${n} ta`,
+    compactOn: "Ixcham: YOQILDI",
+    compactOff: "Ixcham: O‘CHIQ",
+    emptyTitle: "Topilmadi",
+    emptyDesc: "Boshqa so‘z yozing yoki filtrlarni tozalang.",
+    emptyReset: "Filtrlarni tozalash",
+    add: "Savatga",
+    details: "Batafsil",
+    inStock: "Bor",
+    lowStock: "Kam",
+    outOfStock: "Yo‘q",
+    price: "Narx",
+    orderTitle: "Buyurtma / Aloqa",
+    orderTelegram: "Telegramda buyurtma",
+    orderInstagram: "Instagram",
+    orderPhone: "Qo‘ng‘iroq",
+    orderHint: "Telegram xabarida mahsulot + narx + soni bo‘ladi.",
+    cartTitle: "Savat",
+    cartSubtitle: "Tekshiring va yuboring",
+    cartEmpty: "Savat bo‘sh.",
+    cartTotal: "Jami",
+    remove: "O‘chirish",
+    qty: "Soni",
+    checkoutTelegram: "Telegramga yuborish",
+    checkoutInstagram: "Instagram",
+    checkoutPhone: "Qo‘ng‘iroq",
+    checkoutHint: "Onlayn to‘lov yo‘q — mavjudlik, narx, yetkazish va kafolatni chatda tasdiqlaymiz.",
+    servicesTitle: "Xizmatlar",
+    servicesSubtitle: "Xorijiy do‘konlar kabi — tanlashdan sozlashgacha professional.",
+    brandsTitle: "Brendlar",
+    brandsSubtitle: "Apple + ishonchli aksessuar brendlari.",
+    locationTitle: "Manzil",
+    locationSubtitle: "Malikaga keling yoki onlayn buyurtma — tez javob beramiz.",
+    openMaps: "Xaritada ochish",
+    telegram: "Telegram",
+    instagram: "Instagram",
+    phone: "Telefon",
+    mapFootnote: "Xarita taxminiy. Marshrut uchun “Xaritada ochish”ni bosing.",
+    faqTitle: "FAQ",
+    faqSubtitle: "Eng ko‘p so‘raladigan savollarga qisqa javoblar.",
+    footerDesc: "Professional vitrina shabloni (Tailwind + JS). Kontakt/mahsulotlarni almashtiring va soting.",
+    footerLinks: "Bo‘limlar",
+    footerContact: "Aloqa",
+    legal: "Narxlar namunaviy. O‘zingizning real narxlaringizni kiriting. Brendlar egalariga tegishli.",
+    toastAdded: "Savatga qo‘shildi",
+    toastRemoved: "O‘chirildi",
+    toastWishAdded: "Sevimlilarga qo‘shildi",
+    toastWishRemoved: "Sevimlilardan o‘chirildi",
+    toastCleared: "Filtrlar tozalandi",
+  },
+};
+
+/**
+ * =========================================================
+ * CATEGORIES (Phones, chargers, naushnik simli/simsiz, AirPods, etc.)
+ * =========================================================
+ */
+const CATEGORIES = [
+  { id: "all", label: { en: "All", ru: "Все", uz: "Barchasi" } },
+  { id: "phones", label: { en: "Phones", ru: "Телефоны", uz: "Telefonlar" } },
+  { id: "airpods", label: { en: "AirPods", ru: "AirPods", uz: "AirPods" } },
+  { id: "wired", label: { en: "Wired earphones", ru: "Проводные", uz: "Simli quloqchin" } },
+  { id: "chargers", label: { en: "Chargers", ru: "Зарядки", uz: "Zaryadlovchi" } },
+  { id: "cables", label: { en: "Cables", ru: "Кабели", uz: "Kabellar" } },
+  { id: "cases", label: { en: "Cases", ru: "Чехлы", uz: "G‘iloflar" } },
+  { id: "power", label: { en: "Power & MagSafe", ru: "Питание/MagSafe", uz: "Quvvat/MagSafe" } },
+  { id: "sim", label: { en: "SIM & extras", ru: "SIM и др.", uz: "SIM va boshqa" } },
+];
+
+/**
+ * =========================================================
+ * PRODUCTS — “ready to sell” demo catalog.
+ * Replace prices/images with your real inventory (easy).
+ *
+ * Price is stored in UZS by default; USD view uses STORE.usdToUzs.
+ * =========================================================
+ */
+function svgPlaceholder(title, subtitle = "") {
+  const safeT = encodeURIComponent(title);
+  const safeS = encodeURIComponent(subtitle);
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#0a0a0f"/>
+          <stop offset="1" stop-color="#e5e7eb"/>
+        </linearGradient>
+        <filter id="b" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="30"/>
+        </filter>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#g)"/>
+      <circle cx="260" cy="230" r="180" fill="#ffffff" opacity="0.10" filter="url(#b)"/>
+      <circle cx="980" cy="640" r="260" fill="#000000" opacity="0.12" filter="url(#b)"/>
+      <rect x="80" y="80" width="1040" height="640" rx="60" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="140" y="240" fill="#ffffff" font-size="64" font-family="ui-sans-serif, system-ui" font-weight="700">${decodeURIComponent(safeT)}</text>
+      <text x="140" y="310" fill="rgba(255,255,255,0.8)" font-size="30" font-family="ui-sans-serif, system-ui" font-weight="500">${decodeURIComponent(safeS)}</text>
+      <text x="140" y="660" fill="rgba(255,255,255,0.65)" font-size="22" font-family="ui-sans-serif, system-ui">Replace this photo with your real product image</text>
+    </svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+const PRODUCTS = [
+  // Phones
+  {
+    id: "ip17pro",
+    category: "phones",
+    name: { en: "iPhone 17 Pro", ru: "iPhone 17 Pro", uz: "iPhone 17 Pro" },
+    desc: {
+      en: "Flagship performance, Pro camera features, premium build. (Set your real storage/variant pricing.)",
+      ru: "Флагман, Pro-камера, премиальная сборка. (Поставьте цены по памяти/варианту.)",
+      uz: "Flagman, Pro kamera, premium dizayn. (Xotira/variant bo‘yicha narx qo‘ying.)",
+    },
+    priceUZS: 15999000,
+    oldPriceUZS: 16999000,
+    tags: ["iphone", "pro", "new", "flagship"],
+    stock: 6,
+    badge: "NEW",
+    featured: 1,
+    isNew: true,
+    image: "https://assets.asaxiy.uz/product/items/desktop/1679091c5a880faf6fb5e6087eb1b2dc2025092015425123382OPhwE1M1AP.jpg",
+  },
+  {
+    id: "ip17",
+    category: "phones",
+    name: { en: "iPhone 17", ru: "iPhone 17", uz: "iPhone 17" },
+    desc: {
+      en: "Best balance for most people. Great camera, battery, display.",
+      ru: "Лучший баланс. Камера, батарея, дисплей.",
+      uz: "Eng yaxshi balans. Kamera, batareya, ekran.",
+    },
+    priceUZS: 12999000,
+    oldPriceUZS: 13499000,
+    tags: ["iphone", "new"],
+    stock: 10,
+    badge: "TOP",
+    featured: 1,
+    isNew: true,
+    image: "https://avatars.mds.yandex.net/i?id=a8d6ce5c960eebb94ca7e22d6c722ebff2e7402b-5513333-images-thumbs&n=13",
+  },
+  {
+    id: "ipair",
+    category: "phones",
+    name: { en: "iPhone Air", ru: "iPhone Air", uz: "iPhone Air" },
+    desc: {
+      en: "Lightweight design focus. Ideal for comfort and style.",
+      ru: "Лёгкий корпус. Комфорт и стиль.",
+      uz: "Yengil dizayn. Qulay va chiroyli.",
+    },
+    priceUZS: 13999000,
+    oldPriceUZS: 14999000,
+    tags: ["iphone", "air", "thin"],
+    stock: 4,
+    badge: "HOT",
+    featured: 1,
+    isNew: true,
+    image: "https://avatars.mds.yandex.net/i?id=f011c84694ba93bae5d275318f81d560e7fb3c98-5582331-images-thumbs&n=13",
+  },
+  {
+    id: "ip16",
+    category: "phones",
+    name: { en: "iPhone 16", ru: "iPhone 16", uz: "iPhone 16" },
+    desc: {
+      en: "Reliable choice with great value. Perfect upgrade path.",
+      ru: "Надёжный выбор и хорошая цена.",
+      uz: "Ishonchli tanlov va yaxshi narx.",
+    },
+    priceUZS: 10999000,
+    oldPriceUZS: 11999000,
+    tags: ["iphone", "value"],
+    stock: 12,
+    badge: "SALE",
+    featured: 1,
+    isNew: false,
+    image: "https://avatars.mds.yandex.net/i?id=2c829d3f21f1f20d626a00ea6809d2e0c99b2311-8311401-images-thumbs&n=13",
+  },
+  {
+    id: "ip16e",
+    category: "phones",
+    name: { en: "iPhone 16e", ru: "iPhone 16e", uz: "iPhone 16e" },
+    desc: {
+      en: "Budget-friendly Apple experience. Great for gifts and first iPhone.",
+      ru: "Доступный iPhone. Отлично для подарка.",
+      uz: "Hamyonbop iPhone. Sovg‘a uchun zo‘r.",
+    },
+    priceUZS: 8999000,
+    oldPriceUZS: 9499000,
+    tags: ["iphone", "budget"],
+    stock: 15,
+    badge: "VALUE",
+    featured: 1,
+    isNew: false,
+    image: "https://avatars.mds.yandex.net/i?id=d351bf82507ca874c4f9e4e11e2d4ec6d6593f0d-3070965-images-thumbs&n=13",
+  },
+  // AirPods / Wireless
+  {
+    id: "airpodspro3",
+    category: "airpods",
+    name: { en: "AirPods Pro (3rd gen)", ru: "AirPods Pro (3-е)", uz: "AirPods Pro (3-avlod)" },
+    desc: {
+      en: "Premium ANC, adaptive audio, comfortable fit. Great for calls.",
+      ru: "Премиум ANC, адаптивный звук, удобно. Отлично для звонков.",
+      uz: "Premium ANC, moslashuvchan audio, qulay. Qo‘ng‘iroq uchun zo‘r.",
+    },
+    priceUZS: 3399000,
+    oldPriceUZS: 3699000,
+    tags: ["airpods", "anc", "wireless"],
+    stock: 8,
+    badge: "TOP",
+    featured: 1,
+    isNew: true,
+    image: "https://avatars.mds.yandex.net/i?id=292cd77f06d3979fc7a57612dd8a267c5bc852fe-12423254-images-thumbs&n=13",
+  },
+  {
+    id: "airpods4",
+    category: "airpods",
+    name: { en: "AirPods 4", ru: "AirPods 4", uz: "AirPods 4" },
+    desc: {
+      en: "Everyday wireless with great sound. Perfect for iPhone pairing.",
+      ru: "На каждый день. Отличная связка с iPhone.",
+      uz: "Har kuni uchun. iPhone bilan zo‘r ishlaydi.",
+    },
+    priceUZS: 2399000,
+    oldPriceUZS: 2599000,
+    tags: ["airpods", "wireless"],
+    stock: 9,
+    badge: "",
+    featured: 1,
+    isNew: true,
+    image: "https://avatars.mds.yandex.net/i?id=79a07e09170ddcf450294fa7b52c7dd2f6d361c7-16349630-images-thumbs&n=13",
+  },
+  {
+    id: "airpodsmax",
+    category: "airpods",
+    name: { en: "AirPods Max", ru: "AirPods Max", uz: "AirPods Max" },
+    desc: {
+      en: "Over-ear premium sound + noise cancellation. Luxury listening.",
+      ru: "Премиальные полноразмерные с шумоподавлением.",
+      uz: "Katta quloqchin, premium tovush + ANC.",
+    },
+    priceUZS: 7999000,
+    oldPriceUZS: 8499000,
+    tags: ["airpods", "max", "anc"],
+    stock: 2,
+    badge: "PREMIUM",
+    featured: 0,
+    isNew: false,
+    image: "https://avatars.mds.yandex.net/i?id=ab896b2528b947aa1a42c82d782f9a0830bab475-6953466-images-thumbs&n=13",
+  },
+
+  // Wired earphones (naushnik simli)
+  {
+    id: "earpods-usbc",
+    category: "wired",
+    name: { en: "EarPods (USB-C)", ru: "EarPods (USB-C)", uz: "EarPods (USB-C)" },
+    desc: {
+      en: "Wired, stable mic quality. Great for calls and lectures.",
+      ru: "Проводные, стабильный микрофон. Для звонков/уроков.",
+      uz: "Simli, mikrofon barqaror. Qo‘ng‘iroq/dars uchun.",
+    },
+    priceUZS: 249000,
+    oldPriceUZS: 299000,
+    tags: ["wired", "earpods", "usb-c"],
+    stock: 30,
+    badge: "BEST",
+    featured: 0,
+    isNew: false,
+    image: "https://avatars.mds.yandex.net/i?id=1ec0f2539ba0baa34835331bde245b4ca7c57e96-13215483-images-thumbs&n=13",
+  },
+  {
+    id: "earpods-lightning",
+    category: "wired",
+    name: { en: "EarPods (Lightning)", ru: "EarPods (Lightning)", uz: "EarPods (Lightning)" },
+    desc: {
+      en: "For Lightning iPhones. Clean sound, easy plug & play.",
+      ru: "Для Lightning iPhone. Чистый звук, просто.",
+      uz: "Lightning iPhone uchun. Tovush toza, oson.",
+    },
+    priceUZS: 249000,
+    oldPriceUZS: 299000,
+    tags: ["wired", "earpods", "lightning"],
+    stock: 14,
+    badge: "",
+    featured: 0,
+    isNew: false,
+    image: "https://avatars.mds.yandex.net/i?id=ac0bc4a9747e8d8a573f4bdfaf10952b15be26c2-9065817-images-thumbs&n=13",
+  },
+
+  // Chargers (chargers)
+  {
+    id: "apple-20w",
+    category: "chargers",
+    name: { en: "Apple 20W USB-C Power Adapter", ru: "Apple адаптер 20W USB-C", uz: "Apple 20W USB-C adapter" },
+    desc: {
+      en: "Fast and safe charging for iPhone. Recommended base adapter.",
+      ru: "Быстрая и безопасная зарядка iPhone. База.",
+      uz: "Tez va xavfsiz zaryad. Asosiy adapter.",
+    },
+    priceUZS: 399000,
+    oldPriceUZS: 449000,
+    tags: ["charger", "20w", "usb-c"],
+    stock: 40,
+    badge: "FAST",
+    featured: 1,
+    isNew: false,
+    image: "https://avatars.mds.yandex.net/i?id=1ccc91beb9960499f219c78148cecc9abd3f3c98-5849895-images-thumbs&n=13",
+  },
+  {
+    id: "apple-35w-dual",
+    category: "chargers",
+    name: { en: "Apple 35W Dual USB-C", ru: "Apple 35W Dual USB-C", uz: "Apple 35W Dual USB-C" },
+    desc: {
+      en: "Charge two devices at once. Great for iPhone + AirPods.",
+      ru: "Два устройства одновременно. Удобно.",
+      uz: "Bir vaqtda 2 ta qurilma. Qulay.",
+    },
+    priceUZS: 899000,
+    oldPriceUZS: 999000,
+    tags: ["charger", "dual", "usb-c"],
+    stock: 10,
+    badge: "",
+    featured: 0,
+    isNew: false,
+    image: "https://avatars.mds.yandex.net/get-marketpic/11535831/pic7af58c3f88c48bb182151529f7329a0a/orig",
+  },
+  {
+    id: "anker-gan-65",
+    category: "chargers",
+    name: { en: "Anker GaN 65W (2–3 ports)", ru: "Anker GaN 65W (2–3 порта)", uz: "Anker GaN 65W (2–3 port)" },
+    desc: {
+      en: "Compact power for iPhone, iPad, MacBook Air. Top seller.",
+      ru: "Компактно: iPhone/iPad/MacBook Air. Хит.",
+      uz: "Ixcham: iPhone/iPad/MacBook Air. Top.",
+    },
+    priceUZS: 649000,
+    oldPriceUZS: 749000,
+    tags: ["charger", "gan", "anker"],
+    stock: 7,
+    badge: "TOP",
+    featured: 1,
+    isNew: true,
+    image: "https://avatars.mds.yandex.net/i?id=af5cd2d1555e5a9b769cff63ba53035fbbb16cd3-4281133-images-thumbs&n=13",
+  },
+
+  // Cables
+  {
+    id: "cable-usbc-lightning",
+    category: "cables",
+    name: { en: "USB-C ↔ Lightning cable (1m)", ru: "USB-C ↔ Lightning (1м)", uz: "USB-C ↔ Lightning (1m)" },
+    desc: {
+      en: "For Lightning iPhones. Fast charging with 20W adapter.",
+      ru: "Для Lightning iPhone. Быстрая зарядка с 20W.",
+      uz: "Lightning iPhone uchun. 20W bilan tez.",
+    },
+    priceUZS: 199000,
+    oldPriceUZS: 249000,
+    tags: ["cable", "lightning", "usb-c"],
+    stock: 22,
+    badge: "",
+    featured: 0,
+    isNew: false,
+    image: "https://avatars.mds.yandex.net/i?id=0257cb47412dd9a302e52e3fd878346c3afff22e-11003961-images-thumbs&n=13",
+  },
+  {
+    id: "cable-usbc-usbc",
+    category: "cables",
+    name: { en: "USB-C ↔ USB-C cable (2m)", ru: "USB-C ↔ USB-C (2м)", uz: "USB-C ↔ USB-C (2m)" },
+    desc: {
+      en: "For iPhone (USB-C), iPad, power banks, laptop charging.",
+      ru: "Для iPhone (USB-C), iPad, павербанков, ноутбуков.",
+      uz: "iPhone (USB-C), iPad, powerbank, noutbuk uchun.",
+    },
+    priceUZS: 189000,
+    oldPriceUZS: 229000,
+    tags: ["cable", "usb-c"],
+    stock: 30,
+    badge: "BEST",
+    featured: 0,
+    isNew: false,
+    image: "https://avatars.mds.yandex.net/i?id=9cfc4c665e876297c202fe68331f692bd1ae5090-10311550-images-thumbs&n=13",
+  },
+
+  // Cases
+  {
+    id: "case-17pro-silicone",
+    category: "cases",
+    name: { en: "Silicone case — iPhone 17 Pro", ru: "Силиконовый чехол — iPhone 17 Pro", uz: "Silikon g‘ilof — iPhone 17 Pro" },
+    desc: { en: "Soft touch, camera protection, slim fit.", ru: "Мягкий, защита камеры, тонкий.", uz: "Yumshoq, kamera himoyasi, yupqa." },
+    priceUZS: 249000,
+    oldPriceUZS: 299000,
+    tags: ["case", "silicone"],
+    stock: 18,
+    badge: "",
+    featured: 0,
+    isNew: true,
+    image: "https://avatars.mds.yandex.net/i?id=69292d922b38ce2ed28d746559c218ef13ab7e06-4599759-images-thumbs&n=13",
+  },
+  {
+    id: "case-16-clear",
+    category: "cases",
+    name: { en: "Clear case — iPhone 16", ru: "Прозрачный чехол — iPhone 16", uz: "Shaffof g‘ilof — iPhone 16" },
+    desc: { en: "Minimal look, scratch resistant.", ru: "Минимализм, защита от царапин.", uz: "Minimal, tirnalishga chidamli." },
+    priceUZS: 219000,
+    oldPriceUZS: 269000,
+    tags: ["case", "clear"],
+    stock: 25,
+    badge: "SALE",
+    featured: 0,
+    isNew: false,
+    image: "https://avatars.mds.yandex.net/i?id=8bb1d9ed61e2181d722e29d43c37c4b4741b1aeb-5254684-images-thumbs&n=13",
+  },
+
+  // Power & MagSafe
+  {
+    id: "magsafe-charger",
+    category: "power",
+    name: { en: "MagSafe Charger", ru: "MagSafe зарядка", uz: "MagSafe zaryadlovchi" },
+    desc: { en: "Magnetic wireless charging. Perfect for MagSafe cases.", ru: "Магнитная беспроводная зарядка.", uz: "Magnitli simsiz zaryad." },
+    priceUZS: 499000,
+    oldPriceUZS: 549000,
+    tags: ["magsafe", "wireless", "charger"],
+    stock: 11,
+    badge: "",
+    featured: 1,
+    isNew: false,
+    image: "https://avatars.mds.yandex.net/i?id=f66f8385ebed5217c10b52cac9440a57f54515b1-5905783-images-thumbs&n=13",
+  },
+  {
+    id: "magsafe-powerbank",
+    category: "power",
+    name: { en: "MagSafe power bank 10,000mAh", ru: "MagSafe power bank 10,000mAh", uz: "MagSafe powerbank 10,000mAh" },
+    desc: {
+      en: "Snap-on battery for travel. Strong magnets + USB-C input/output.",
+      ru: "Удобно в дороге. Магниты + USB-C вход/выход.",
+      uz: "Sayohat uchun qulay. Magnit + USB-C kirish/chiqish.",
+    },
+    priceUZS: 699000,
+    oldPriceUZS: 799000,
+    tags: ["powerbank", "magsafe", "travel"],
+    stock: 5,
+    badge: "TOP",
+    featured: 1,
+    isNew: true,
+    image: "https://avatars.mds.yandex.net/i?id=283a4ccd298f4c52ac2ecc6d5f273b70f5a646a2-12923554-images-thumbs&n=13",
+  },
+
+  // SIM & extras
+  {
+    id: "esim-setup",
+    category: "sim",
+    name: { en: "eSIM setup service", ru: "Услуга: настройка eSIM", uz: "Xizmat: eSIM sozlash" },
+    desc: {
+      en: "We help activate, transfer, and configure eSIM on your iPhone.",
+      ru: "Поможем активировать/перенести и настроить eSIM.",
+      uz: "eSIMni yoqish/ko‘chirish va sozlashga yordam beramiz.",
+    },
+    priceUZS: 99000,
+    oldPriceUZS: 129000,
+    tags: ["service", "esim", "setup"],
+    stock: 999,
+    badge: "SERVICE",
+    featured: 0,
+    isNew: true,
+    image: "https://i.ytimg.com/vi/4xqa_8L6q68/maxresdefault.jpg",
+  },
+  {
+    id: "screen-protector",
+    category: "sim",
+    name: { en: "Tempered glass (premium)", ru: "Стекло (премиум)", uz: "Himoya oynasi (premium)" },
+    desc: { en: "Anti-scratch, smooth touch, high clarity.", ru: "От царапин, плавное касание.", uz: "Tirnalishga qarshi, silliq." },
+    priceUZS: 99000,
+    oldPriceUZS: 129000,
+    tags: ["glass", "protector"],
+    stock: 60,
+    badge: "BEST",
+    featured: 0,
+    isNew: false,
+    image: "https://avatars.mds.yandex.net/i?id=59886d400f666257b1eeae159c237c8aeee9540d-4697805-images-thumbs&n=13",
+  },
+];
+
+/**
+ * =========================================================
+ * UI ICONS (inline SVG)
+ * =========================================================
+ */
+const ICONS = {
+  menu: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  close: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  search: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10.5 19a8.5 8.5 0 1 1 0-17 8.5 8.5 0 0 1 0 17Z" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.2-4.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  cart: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6h15l-1.5 9h-12z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M6 6l-2-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM18 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" stroke="currentColor" stroke-width="2"/></svg>`,
+  heart: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.35-9.33-8.5C.6 8.9 2.28 6 5.5 6c1.76 0 3.21.88 4 2.07C10.29 6.88 11.74 6 13.5 6c3.22 0 4.9 2.9 2.83 6.5C19 16.65 12 21 12 21z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`,
+  sunMoon: (isDark) =>
+    isDark
+      ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 1 0 9.8 9.8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`
+      : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  plus: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  bolt: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`,
+  phone: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.5 3h3L11 7l-2 2c1.2 2.4 3.1 4.3 5.5 5.5l2-2 4 1.5v3c0 1-1 2-2 2C10.6 19.5 4.5 13.4 4.5 5c0-1 1-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`,
+  map: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10 20l-6 2V6l6-2 4 2 6-2v16l-6 2-4-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 4v16M14 6v16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  arrowDown: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  telegram: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9.04 15.62 8.9 19.8c.57 0 .82-.24 1.12-.53l2.7-2.58 5.6 4.1c1.02.56 1.75.27 2-.95l3.63-17.02v0c.3-1.4-.5-1.95-1.5-1.58L1.5 9.28c-1.35.52-1.33 1.27-.25 1.6l5.92 1.85L20.7 4.5c.64-.42 1.22-.2.74.22z"/></svg>`,
+  instagram: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Z" stroke="currentColor" stroke-width="2"/><path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="2"/><path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>`,
+};
+
+/**
+ * =========================================================
+ * STATE + STORAGE
+ * =========================================================
+ */
+const LS = {
+  get(key, fallback) {
+    try {
+      const v = localStorage.getItem(key);
+      return v ? JSON.parse(v) : fallback;
+    } catch {
+      return fallback;
+    }
+  },
+  set(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  },
+};
+
+const state = {
+  lang: LS.get("lang", "en"),
+  currency: LS.get("currency", "UZS"),
+  theme: LS.get("theme", "dark"),
+  query: "",
+  category: LS.get("category", "all"),
+  sort: LS.get("sort", "featured"),
+  compact: LS.get("compact", false),
+  cart: LS.get("cart", {}), // { productId: qty }
+  wishlist: LS.get("wishlist", {}), // { productId: true }
+  activeProductId: null,
+};
+
+/**
+ * =========================================================
+ * HELPERS
+ * =========================================================
+ */
+function t(key, ...args) {
+  const dict = I18N[state.lang] || I18N.en;
+  const val = dict[key];
+  return typeof val === "function" ? val(...args) : val ?? key;
+}
+
+function categoryLabel(catId) {
+  const c = CATEGORIES.find((x) => x.id === catId) || CATEGORIES[0];
+  return c.label[state.lang] || c.label.en;
+}
+
+function formatMoneyUZS(uzs) {
+  return new Intl.NumberFormat("uz-UZ").format(Math.round(uzs)) + " UZS";
+}
+
+function formatMoneyUSD(usd) {
+  return "$" + new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(Math.round(usd));
+}
+
+function displayPrice(uzs) {
+  if (state.currency === "UZS") return formatMoneyUZS(uzs);
+  const usd = uzs / STORE.usdToUzs;
+  return formatMoneyUSD(usd);
+}
+
+function getProductName(p) {
+  return p.name[state.lang] || p.name.en;
+}
+
+function getProductDesc(p) {
+  return p.desc[state.lang] || p.desc.en;
+}
+
+function cartCount() {
+  return Object.values(state.cart).reduce((a, b) => a + b, 0);
+}
+
+function wishlistCount() {
+  return Object.keys(state.wishlist).length;
+}
+
+function cartTotalUZS() {
+  return Object.entries(state.cart).reduce((sum, [id, qty]) => {
+    const p = PRODUCTS.find((x) => x.id === id);
+    return p ? sum + p.priceUZS * qty : sum;
+  }, 0);
+}
+
+function toast(msg) {
+  const host = $("#toastHost");
+  const el = document.createElement("div");
+  el.className =
+    "animate-toast rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold shadow-soft dark:border-zinc-800 dark:bg-zinc-900";
+  el.textContent = msg;
+  host.appendChild(el);
+  setTimeout(() => el.remove(), 2200);
+}
+
+function setTheme(theme) {
+  state.theme = theme;
+  LS.set("theme", theme);
+  document.documentElement.classList.toggle("dark", theme === "dark");
+  $("#iconTheme").innerHTML = ICONS.sunMoon(theme === "dark");
+}
+
+function setLang(lang) {
+  state.lang = lang;
+  LS.set("lang", lang);
+  document.documentElement.lang = lang;
+  hydrateText();
+  renderAll();
+}
+
+function setCurrency(currency) {
+  state.currency = currency;
+  LS.set("currency", currency);
+  renderAll();
+}
+
+function $(sel) {
+  const el = document.querySelector(sel);
+  if (!el) throw new Error("Missing element: " + sel);
+  return el;
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function buildOrderMessage(itemsUZS, context) {
+  const lines = [];
+  lines.push(`🛒 ${STORE.name} — Order`);
+  lines.push(`📍 ${STORE.address.en}`);
+  lines.push("");
+  lines.push("Items:");
+  for (const it of itemsUZS) {
+    lines.push(`• ${it.name} ×${it.qty} — ${formatMoneyUZS(it.priceUZS)} each`);
+  }
+  lines.push("");
+  const total = itemsUZS.reduce((s, x) => s + x.priceUZS * x.qty, 0);
+  lines.push(`Total: ${formatMoneyUZS(total)}`);
+  lines.push("");
+  lines.push(`Context: ${context}`);
+  lines.push("Name: ");
+  lines.push("Phone: ");
+  lines.push("Delivery: pickup / delivery");
+  return lines.join("\n");
+}
+
+function openTelegramWithText(text) {
+  const url = `https://t.me/${encodeURIComponent(STORE.telegramUsername)}?text=${encodeURIComponent(text)}`;
+  window.open(url, "_blank", "noreferrer");
+}
+
+/**
+ * =========================================================
+ * RENDER
+ * =========================================================
+ */
+function filteredProducts() {
+  const q = state.query.trim().toLowerCase();
+  const byCat = state.category === "all" ? PRODUCTS : PRODUCTS.filter((p) => p.category === state.category);
+
+  const byQuery = !q
+    ? byCat
+    : byCat.filter((p) => {
+        const name = (getProductName(p) || "").toLowerCase();
+        const altEn = (p.name.en || "").toLowerCase();
+        const altRu = (p.name.ru || "").toLowerCase();
+        const altUz = (p.name.uz || "").toLowerCase();
+        const tags = (p.tags || []).join(" ").toLowerCase();
+        return [name, altEn, altRu, altUz, tags].some((s) => s.includes(q));
+      });
+
+  const sorted = [...byQuery];
+  if (state.sort === "priceAsc") sorted.sort((a, b) => a.priceUZS - b.priceUZS);
+  if (state.sort === "priceDesc") sorted.sort((a, b) => b.priceUZS - a.priceUZS);
+  if (state.sort === "new") sorted.sort((a, b) => Number(!!b.isNew) - Number(!!a.isNew));
+  if (state.sort === "featured")
+    sorted.sort((a, b) => (Number(!!b.featured) - Number(!!a.featured)) || (Number(!!b.isNew) - Number(!!a.isNew)));
+
+  return sorted;
+}
+
+function renderCategories() {
+  const row = $("#categoryRow");
+  row.innerHTML = "";
+  for (const c of CATEGORIES) {
+    const active = c.id === state.category;
+    const btn = document.createElement("button");
+    btn.className =
+      "whitespace-nowrap rounded-2xl border px-4 py-2 text-sm font-semibold transition " +
+      (active
+        ? "border-zinc-900 bg-zinc-900 text-white dark:border-white dark:bg-white dark:text-zinc-900"
+        : "border-zinc-200 bg-white text-zinc-800 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800");
+    btn.textContent = c.label[state.lang] || c.label.en;
+    btn.addEventListener("click", () => {
+      state.category = c.id;
+      LS.set("category", c.id);
+      renderAll();
+    });
+    row.appendChild(btn);
+  }
+}
+
+function stockPill(p) {
+  if (p.stock <= 0) return { text: t("outOfStock"), cls: "border-rose-300 bg-rose-50 text-rose-700 dark:border-rose-900/60 dark:bg-rose-950/60 dark:text-rose-200" };
+  if (p.stock <= 5) return { text: t("lowStock"), cls: "border-amber-300 bg-amber-50 text-amber-700 dark:border-amber-900/60 dark:bg-amber-950/60 dark:text-amber-200" };
+  return { text: t("inStock"), cls: "border-emerald-300 bg-emerald-50 text-emerald-700 dark:border-emerald-900/60 dark:bg-emerald-950/60 dark:text-emerald-200" };
+}
+
+function renderProducts() {
+  const grid = $("#productGrid");
+  const empty = $("#emptyState");
+  const items = filteredProducts();
+
+  $("#resultsMeta").textContent = t("results", items.length);
+
+  grid.className = state.compact
+    ? "mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+    : "mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3";
+
+  grid.innerHTML = "";
+
+  if (items.length === 0) {
+    empty.classList.remove("hidden");
+    $("#btnEmptyReset").textContent = t("emptyReset");
+    return;
+  }
+  empty.classList.add("hidden");
+
+  for (const p of items) {
+    const inWish = !!state.wishlist[p.id];
+    const qty = state.cart[p.id] || 0;
+    const stock = stockPill(p);
+
+    const card = document.createElement("div");
+    card.className =
+      "group overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900";
+
+    card.innerHTML = `
+      <div class="relative">
+        <img src="${escapeHtml(p.image)}" alt="${escapeHtml(getProductName(p))}" class="${state.compact ? "h-44" : "h-52"} w-full object-cover" loading="lazy">
+        <div class="absolute left-3 top-3 flex flex-wrap items-center gap-2">
+          ${p.badge ? `<span class="rounded-full bg-zinc-900 px-3 py-1 text-xs font-semibold text-white dark:bg-white dark:text-zinc-900">${escapeHtml(p.badge)}</span>` : ""}
+          <span class="rounded-full border px-3 py-1 text-xs font-semibold ${stock.cls}">${escapeHtml(stock.text)}</span>
+        </div>
+        <button class="btnWish absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-200 bg-white/90 backdrop-blur hover:bg-white dark:border-zinc-800 dark:bg-zinc-950/80" aria-label="Wishlist" data-id="${escapeHtml(p.id)}">
+          <span class="${inWish ? "text-rose-600" : "text-zinc-700 dark:text-zinc-200"}">${ICONS.heart}</span>
+        </button>
+      </div>
+
+      <div class="${state.compact ? "p-4" : "p-5"}">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <div class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">${escapeHtml(categoryLabel(p.category))}</div>
+            <div class="mt-1 text-lg font-semibold tracking-tight">${escapeHtml(getProductName(p))}</div>
+          </div>
+          <div class="text-right">
+            <div class="text-lg font-semibold">${escapeHtml(displayPrice(p.priceUZS))}</div>
+            <div class="text-xs text-zinc-500 line-through">${p.oldPriceUZS ? escapeHtml(displayPrice(p.oldPriceUZS)) : ""}</div>
+          </div>
+        </div>
+
+        <p class="mt-2 line-clamp-2 text-sm text-zinc-700 dark:text-zinc-300">${escapeHtml(getProductDesc(p))}</p>
+
+        <div class="mt-4 flex items-center gap-2">
+          <button class="btnAdd inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-zinc-900 px-4 py-3 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50 dark:bg-white dark:text-zinc-900" data-id="${escapeHtml(p.id)}" ${p.stock <= 0 ? "disabled" : ""}>
+            ${ICONS.plus}<span>${escapeHtml(t("add"))}${qty ? ` • ${qty}` : ""}</span>
+          </button>
+          <button class="btnDetails inline-flex items-center justify-center rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-900" data-id="${escapeHtml(p.id)}">
+            <span>${escapeHtml(t("details"))}</span>
+          </button>
+        </div>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  }
+
+  // Bind buttons
+  grid.querySelectorAll(".btnAdd").forEach((btn) =>
+    btn.addEventListener("click", (e) => addToCart(e.currentTarget.dataset.id))
+  );
+  grid.querySelectorAll(".btnDetails").forEach((btn) =>
+    btn.addEventListener("click", (e) => openProductModal(e.currentTarget.dataset.id))
+  );
+  grid.querySelectorAll(".btnWish").forEach((btn) =>
+    btn.addEventListener("click", (e) => toggleWishlist(e.currentTarget.dataset.id))
+  );
+}
+
+function renderServices() {
+  const services = [
+    { icon: "🚚", title: { en: "Delivery & pickup", ru: "Доставка и самовывоз", uz: "Yetkazish va olib ketish" }, desc: { en: "Fast options across Tashkent. Pickup in Malika.", ru: "Быстро по Ташкенту. Самовывоз на Малика.", uz: "Toshkent bo‘ylab tez. Malikadan olib ketish." } },
+    { icon: "🛠️", title: { en: "Setup & transfer", ru: "Настройка и перенос", uz: "Sozlash va ko‘chirish" }, desc: { en: "Data transfer, Apple ID help, WhatsApp/Telegram restore.", ru: "Перенос данных, Apple ID, восстановление чатов.", uz: "Ma’lumot ko‘chirish, Apple ID, chatlarni tiklash." } },
+    { icon: "🧾", title: { en: "Warranty options", ru: "Варианты гарантии", uz: "Kafolat variantlari" }, desc: { en: "Discuss warranty and checks in chat before purchase.", ru: "Гарантию и проверку согласуем в чате.", uz: "Kafolat va tekshiruv chatda kelishiladi." } },
+    { icon: "💳", title: { en: "Payments", ru: "Оплата", uz: "To‘lov" }, desc: { en: "Cash / card / transfer. Installments if available.", ru: "Нал/карта/перевод. Рассрочка при наличии.", uz: "Naqd/karta/o‘tkazma. Bo‘lsa bo‘lib to‘lash." } },
+  ];
+
+  const grid = $("#servicesGrid");
+  grid.innerHTML = "";
+  for (const s of services) {
+    const card = document.createElement("div");
+    card.className = "rounded-[2rem] border border-zinc-200 bg-white p-6 shadow-soft dark:border-zinc-800 dark:bg-zinc-900";
+    card.innerHTML = `
+      <div class="flex items-start gap-3">
+        <div class="grid h-11 w-11 place-items-center rounded-2xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-900">${s.icon}</div>
+        <div>
+          <div class="text-sm font-semibold">${escapeHtml(s.title[state.lang] || s.title.en)}</div>
+          <div class="mt-1 text-sm text-zinc-700 dark:text-zinc-300">${escapeHtml(s.desc[state.lang] || s.desc.en)}</div>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  }
+}
+
+function renderBrands() {
+  const brands = [
+    { name: "Apple", note: { en: "Devices & originals", ru: "Устройства и оригиналы", uz: "Qurilmalar va original" } },
+    { name: "Anker", note: { en: "GaN chargers", ru: "GaN зарядки", uz: "GaN zaryad" } },
+    { name: "Belkin", note: { en: "MagSafe accessories", ru: "MagSafe аксессуары", uz: "MagSafe aksessuar" } },
+    { name: "Baseus", note: { en: "Cables & power", ru: "Кабели и питание", uz: "Kabel va quvvat" } },
+  ];
+
+  const grid = $("#brandsGrid");
+  grid.innerHTML = "";
+  for (const b of brands) {
+    const card = document.createElement("div");
+    card.className = "rounded-[2rem] border border-zinc-200 bg-white p-6 shadow-soft dark:border-zinc-800 dark:bg-zinc-900";
+    card.innerHTML = `
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-lg font-semibold tracking-tight">${escapeHtml(b.name)}</div>
+          <div class="mt-1 text-sm text-zinc-700 dark:text-zinc-300">${escapeHtml(b.note[state.lang] || b.note.en)}</div>
+        </div>
+        <div class="grid h-12 w-12 place-items-center rounded-2xl border border-zinc-200 bg-zinc-50 text-2xl dark:border-zinc-800 dark:bg-zinc-950">🏷️</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  }
+}
+
+function renderFAQ() {
+  const faqs = [
+    { q: { en: "How do I order?", ru: "Как заказать?", uz: "Qanday buyurtma beraman?" }, a: { en: "Add to cart → open Cart → send order to Telegram. We confirm availability, price, and delivery.", ru: "Добавьте в корзину → откройте Корзину → отправьте в Telegram. Подтвердим наличие, цену и доставку.", uz: "Savatga qo‘shing → Savatni oching → Telegramga yuboring. Mavjudlik, narx va yetkazishni tasdiqlaymiz." } },
+    { q: { en: "Are prices final?", ru: "Цены окончательные?", uz: "Narxlar yakuniymi?" }, a: { en: "Prices can change by storage/condition and market. We confirm in chat before payment.", ru: "Цена зависит от памяти/состояния и рынка. Подтвердим в чате.", uz: "Narx xotira/holat va bozorga bog‘liq. Chatda tasdiqlaymiz." } },
+    { q: { en: "Do you have delivery in Tashkent?", ru: "Есть доставка по Ташкенту?", uz: "Toshkent bo‘ylab yetkazish bormi?" }, a: { en: "Yes. Options depend on area and time. Ask in Telegram for the fastest slot.", ru: "Да. Зависит от района и времени. Напишите в Telegram.", uz: "Ha. Hudud va vaqtga bog‘liq. Telegramda yozing." } },
+    { q: { en: "Can you help with setup and transfer?", ru: "Поможете с настройкой и переносом?", uz: "Sozlash va ko‘chirishga yordam berasizmi?" }, a: { en: "Yes — Apple ID, data transfer, WhatsApp/Telegram restore, eSIM setup.", ru: "Да — Apple ID, перенос, восстановление чатов, eSIM.", uz: "Ha — Apple ID, ko‘chirish, chat tiklash, eSIM." } },
+  ];
+
+  const grid = $("#faqGrid");
+  grid.innerHTML = "";
+  for (const f of faqs) {
+    const card = document.createElement("div");
+    card.className = "rounded-[2rem] border border-zinc-200 bg-white p-6 shadow-soft dark:border-zinc-800 dark:bg-zinc-900";
+    card.innerHTML = `
+      <div class="text-sm font-semibold">${escapeHtml(f.q[state.lang] || f.q.en)}</div>
+      <div class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">${escapeHtml(f.a[state.lang] || f.a.en)}</div>
+    `;
+    grid.appendChild(card);
+  }
+}
+
+function renderCart() {
+  const host = $("#cartItems");
+  host.innerHTML = "";
+
+  const entries = Object.entries(state.cart);
+  if (entries.length === 0) {
+    host.innerHTML = `
+      <div class="grid place-items-center rounded-[2rem] border border-zinc-200 bg-zinc-50 p-8 text-center dark:border-zinc-800 dark:bg-zinc-900">
+        <div class="grid h-14 w-14 place-items-center rounded-2xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-900">🛒</div>
+        <div class="mt-3 text-lg font-semibold">${escapeHtml(t("cartEmpty"))}</div>
+        <a href="#products" class="mt-4 rounded-2xl bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 dark:bg-white dark:text-zinc-900" onclick="document.getElementById('cartOverlay').classList.add('hidden')">${escapeHtml(t("products"))}</a>
+      </div>
+    `;
+  } else {
+    for (const [id, qty] of entries) {
+      const p = PRODUCTS.find((x) => x.id === id);
+      if (!p) continue;
+      const row = document.createElement("div");
+      row.className = "mb-3 overflow-hidden rounded-[1.5rem] border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900";
+      row.innerHTML = `
+        <div class="flex gap-3 p-3">
+          <img src="${escapeHtml(p.image)}" class="h-20 w-20 rounded-2xl object-cover" alt="${escapeHtml(getProductName(p))}">
+          <div class="flex-1">
+            <div class="text-sm font-semibold">${escapeHtml(getProductName(p))}</div>
+            <div class="mt-1 text-xs text-zinc-600 dark:text-zinc-400">${escapeHtml(categoryLabel(p.category))}</div>
+            <div class="mt-2 flex items-center justify-between">
+              <div class="text-sm font-semibold">${escapeHtml(displayPrice(p.priceUZS))}</div>
+              <div class="flex items-center gap-2">
+                <button class="btnQty rounded-xl border border-zinc-200 bg-white px-3 py-1 text-sm font-semibold hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-900" data-id="${escapeHtml(id)}" data-delta="-1" aria-label="Decrease">−</button>
+                <span class="min-w-[2ch] text-center text-sm font-semibold">${qty}</span>
+                <button class="btnQty rounded-xl border border-zinc-200 bg-white px-3 py-1 text-sm font-semibold hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-900" data-id="${escapeHtml(id)}" data-delta="1" aria-label="Increase">+</button>
+                <button class="btnRemove rounded-xl border border-zinc-200 bg-white px-3 py-1 text-xs font-semibold text-rose-600 hover:bg-rose-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-rose-950/40" data-id="${escapeHtml(id)}">${escapeHtml(t("remove"))}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      host.appendChild(row);
+    }
+  }
+
+  const total = cartTotalUZS();
+  $("#cartTotal").textContent = displayPrice(total);
+  $("#cartTotalLabel").textContent = t("cartTotal");
+
+  host.querySelectorAll(".btnQty").forEach((b) =>
+    b.addEventListener("click", (e) => changeQty(e.currentTarget.dataset.id, Number(e.currentTarget.dataset.delta)))
+  );
+  host.querySelectorAll(".btnRemove").forEach((b) =>
+    b.addEventListener("click", (e) => removeFromCart(e.currentTarget.dataset.id))
+  );
+}
+
+function renderCounts() {
+  const cc = cartCount();
+  $("#cartCount").textContent = String(cc);
+  $("#topCartCount").textContent = String(cc);
+  $("#cartLabel").textContent = t("cart");
+  $("#topCartLabel").textContent = t("cart");
+
+  $("#wishCount").textContent = String(wishlistCount());
+}
+
+function renderCompactToggle() {
+  const btn = $("#btnToggleCompact");
+  btn.textContent = state.compact ? t("compactOn") : t("compactOff");
+}
+
+function renderAll() {
+  renderCounts();
+  renderCategories();
+  renderCompactToggle();
+  renderProducts();
+  renderServices();
+  renderBrands();
+  renderFAQ();
+  renderCart();
+}
+
+/**
+ * =========================================================
+ * TEXT HYDRATION
+ * =========================================================
+ */
+function hydrateText() {
+  // Banner + nav
+  $("#bannerText").textContent = t("banner");
+  $("#bannerLocation").textContent = STORE.locationName[state.lang] || STORE.locationName.en;
+  $("#navProducts").textContent = t("products");
+  $("#navServices").textContent = t("services");
+  $("#navLocation").textContent = t("location");
+  $("#navFAQ").textContent = t("faq");
+
+  // Header / store
+  $("#storeName").textContent = STORE.name;
+  $("#storeTagline").textContent = STORE.tagline[state.lang] || STORE.tagline.en;
+
+  // Hero
+  $("#heroPill").textContent = t("heroPill");
+  $("#heroTitle").textContent = t("heroTitle");
+  $("#heroSubtitle").textContent = t("heroSubtitle");
+  $("#heroShopBtn").textContent = t("shopNow");
+  $("#heroQuickOrder").textContent = t("quickOrder");
+  $("#heroCall").textContent = t("callNow");
+  $("#heroCallBtn").href = `tel:${STORE.phoneE164}`;
+  $("#trust1Title").textContent = t("trust1Title");
+  $("#trust1Desc").textContent = t("trust1Desc");
+  $("#trust2Title").textContent = t("trust2Title");
+  $("#trust2Desc").textContent = t("trust2Desc");
+  $("#trust3Title").textContent = t("trust3Title");
+  $("#trust3Desc").textContent = t("trust3Desc");
+  $("#trust4Title").textContent = t("trust4Title");
+  $("#trust4Desc").textContent = t("trust4Desc");
+
+  $("#heroCardKicker").textContent = t("heroCardKicker");
+  $("#heroCardTitle").textContent = t("heroCardTitle");
+  $("#heroStat1Label").textContent = t("heroStat1Label");
+  $("#heroStat2Label").textContent = t("heroStat2Label");
+  $("#heroStat1Value").textContent = String(PRODUCTS.length);
+  $("#heroStat2Value").textContent = String(CATEGORIES.length - 1);
+  $("#heroDealTitle").textContent = t("heroDealTitle");
+  $("#heroDealBadge").textContent = t("heroDealBadge");
+  $("#heroDealDesc").textContent = t("heroDealDesc");
+  $("#heroDealBtn").textContent = t("heroDealBtn");
+  $("#heroFootnote").textContent = t("heroFootnote");
+
+  // Products
+  $("#productsTitle").textContent = t("productsTitle");
+  $("#productsSubtitle").textContent = t("productsSubtitle");
+  $("#sortLabel").textContent = t("sort");
+  $("#sortFeatured").textContent = t("featured");
+  $("#sortNew").textContent = t("newest");
+  $("#sortPriceAsc").textContent = t("priceAsc");
+  $("#sortPriceDesc").textContent = t("priceDesc");
+  $("#resetLabel").textContent = t("reset");
+  $("#emptyTitle").textContent = t("emptyTitle");
+  $("#emptyDesc").textContent = t("emptyDesc");
+
+  // Services
+  $("#servicesTitle").textContent = t("servicesTitle");
+  $("#servicesSubtitle").textContent = t("servicesSubtitle");
+
+  // Brands
+  $("#brandsTitle").textContent = t("brandsTitle");
+  $("#brandsSubtitle").textContent = t("brandsSubtitle");
+
+  // Location
+  $("#locationTitle").textContent = t("locationTitle");
+  $("#locationSubtitle").textContent = t("locationSubtitle");
+  $("#locationName").textContent = STORE.locationName[state.lang] || STORE.locationName.en;
+  $("#locationAddress").textContent = STORE.address[state.lang] || STORE.address.en;
+  $("#locationHoursTitle").textContent = { en: "Hours", ru: "Часы", uz: "Vaqt" }[state.lang] || "Hours";
+  $("#locationHours").textContent = STORE.hours[state.lang] || STORE.hours.en;
+  $("#openMapsLabel").textContent = t("openMaps");
+  $("#telegramLabel").textContent = t("telegram");
+  $("#instagramLabel").textContent = t("instagram");
+  $("#phoneLabel").textContent = t("phone");
+  $("#mapFootnote").textContent = t("mapFootnote");
+
+  // FAQ
+  $("#faqTitle").textContent = t("faqTitle");
+  $("#faqSubtitle").textContent = t("faqSubtitle");
+
+  // Footer
+  $("#footerName").textContent = STORE.name;
+  $("#footerTagline").textContent = STORE.tagline[state.lang] || STORE.tagline.en;
+  $("#footerDesc").textContent = t("footerDesc");
+  $("#footerLinksTitle").textContent = t("footerLinks");
+  $("#footerLinkProducts").textContent = t("products");
+  $("#footerLinkServices").textContent = t("services");
+  $("#footerLinkLocation").textContent = t("location");
+  $("#footerLinkFAQ").textContent = t("faq");
+  $("#footerContactTitle").textContent = t("footerContact");
+  $("#footerTelegramLabel").textContent = t("telegram");
+  $("#footerInstagramLabel").textContent = t("instagram");
+  $("#footerPhoneLabel").textContent = t("phone");
+  $("#legalNote").textContent = t("legal");
+
+  // Cart
+  $("#cartTitle").textContent = t("cartTitle");
+  $("#cartSubtitle").textContent = t("cartSubtitle");
+  $("#checkoutTelegram").textContent = t("checkoutTelegram");
+  $("#checkoutInstagram").textContent = t("checkoutInstagram");
+  $("#checkoutPhone").textContent = t("checkoutPhone");
+  $("#checkoutHint").textContent = t("checkoutHint");
+
+  // Links
+  $("#btnOpenMaps").href = STORE.mapsUrl;
+  $("#btnTelegram").href = `https://t.me/${encodeURIComponent(STORE.telegramUsername)}`;
+  $("#btnInstagram").href = STORE.instagramUrl;
+  $("#btnPhone").href = `tel:${STORE.phoneE164}`;
+  $("#footerTelegram").href = `https://t.me/${encodeURIComponent(STORE.telegramUsername)}`;
+  $("#footerInstagram").href = STORE.instagramUrl;
+  $("#footerPhone").href = `tel:${STORE.phoneE164}`;
+
+  // Search placeholders
+  $("#searchInput").placeholder = state.lang === "ru" ? "Поиск товаров…" : state.lang === "uz" ? "Mahsulot qidirish…" : "Search products…";
+  $("#searchInputMobile").placeholder = $("#searchInput").placeholder;
+
+  // Icons
+  $("#iconMenu").innerHTML = ICONS.menu;
+  $("#iconSearch").innerHTML = ICONS.search;
+  $("#iconSearchMobile").innerHTML = ICONS.search;
+  $("#iconCart").innerHTML = ICONS.cart;
+  $("#iconHeart").innerHTML = ICONS.heart;
+  $("#iconBolt").innerHTML = ICONS.bolt;
+  $("#iconPhone").innerHTML = ICONS.phone;
+  $("#iconPhone2").innerHTML = ICONS.phone;
+  $("#iconPhone3").innerHTML = ICONS.phone;
+  $("#iconPhone4").innerHTML = ICONS.phone;
+  $("#iconPhone5").innerHTML = ICONS.phone;
+  $("#iconMap").innerHTML = ICONS.map;
+  $("#iconArrowDown").innerHTML = ICONS.arrowDown;
+  $("#iconClose").innerHTML = ICONS.close;
+  $("#iconClose2").innerHTML = ICONS.close;
+  $("#iconPlus").innerHTML = ICONS.plus;
+  $("#iconHeart2").innerHTML = ICONS.heart;
+  $("#iconTelegram").innerHTML = ICONS.telegram;
+  $("#iconTelegram2").innerHTML = ICONS.telegram;
+  $("#iconTelegram3").innerHTML = ICONS.telegram;
+  $("#iconTelegram4").innerHTML = ICONS.telegram;
+  $("#iconInstagram").innerHTML = ICONS.instagram;
+  $("#iconInstagram2").innerHTML = ICONS.instagram;
+  $("#iconInstagram3").innerHTML = ICONS.instagram;
+  $("#iconInstagram4").innerHTML = ICONS.instagram;
+
+  // Theme icon refresh
+  $("#iconTheme").innerHTML = ICONS.sunMoon(state.theme === "dark");
+}
+
+/**
+ * =========================================================
+ * ACTIONS
+ * =========================================================
+ */
+function persistCart() {
+  LS.set("cart", state.cart);
+  renderCounts();
+  renderCart();
+  renderProducts();
+}
+
+function addToCart(productId) {
+  const p = PRODUCTS.find((x) => x.id === productId);
+  if (!p || p.stock <= 0) return;
+  state.cart[productId] = (state.cart[productId] || 0) + 1;
+  persistCart();
+  toast(t("toastAdded"));
+}
+
+function changeQty(productId, delta) {
+  const cur = state.cart[productId] || 0;
+  const next = cur + delta;
+  if (next <= 0) {
+    delete state.cart[productId];
+    toast(t("toastRemoved"));
+  } else {
+    state.cart[productId] = next;
+  }
+  persistCart();
+}
+
+function removeFromCart(productId) {
+  delete state.cart[productId];
+  persistCart();
+  toast(t("toastRemoved"));
+}
+
+function toggleWishlist(productId) {
+  if (state.wishlist[productId]) {
+    delete state.wishlist[productId];
+    toast(t("toastWishRemoved"));
+  } else {
+    state.wishlist[productId] = true;
+    toast(t("toastWishAdded"));
+  }
+  LS.set("wishlist", state.wishlist);
+  renderCounts();
+  renderProducts();
+}
+
+/**
+ * =========================================================
+ * MODALS
+ * =========================================================
+ */
+function openProductModal(productId) {
+  const p = PRODUCTS.find((x) => x.id === productId);
+  if (!p) return;
+
+  state.activeProductId = productId;
+
+  $("#modalTitle").textContent = getProductName(p);
+  $("#modalCategory").textContent = categoryLabel(p.category);
+  $("#modalImage").src = p.image;
+  $("#modalImage").alt = getProductName(p);
+
+  const stock = stockPill(p);
+  $("#modalStock").textContent = stock.text;
+  $("#modalStock").className = "rounded-full border px-3 py-1 text-xs font-semibold " + stock.cls;
+
+  $("#modalDesc").textContent = getProductDesc(p);
+
+  $("#modalPriceLabel").textContent = t("price");
+  $("#modalPrice").textContent = displayPrice(p.priceUZS);
+  $("#modalOldPrice").textContent = p.oldPriceUZS ? displayPrice(p.oldPriceUZS) : "";
+  $("#modalOldPrice").style.display = p.oldPriceUZS ? "block" : "none";
+
+  $("#modalBadge").textContent = p.badge || "";
+  $("#modalBadge").classList.toggle("hidden", !p.badge);
+
+  $("#modalAdd").textContent = t("add");
+  $("#modalWish").textContent = t("wishlist");
+  $("#modalOrderTitle").textContent = t("orderTitle");
+  $("#modalOrderTelegram").textContent = t("orderTelegram");
+  $("#modalOrderInstagram").textContent = t("orderInstagram");
+  $("#modalOrderPhone").textContent = t("orderPhone");
+  $("#modalOrderHint").textContent = t("orderHint");
+
+  $("#btnModalAdd").disabled = p.stock <= 0;
+  $("#btnModalAdd").onclick = () => addToCart(p.id);
+  $("#btnModalWish").onclick = () => toggleWishlist(p.id);
+
+  const message = buildOrderMessage(
+    [{ name: getProductName(p), qty: 1, priceUZS: p.priceUZS }],
+    "Product page"
+  );
+
+  $("#btnOrderTelegram").onclick = () => openTelegramWithText(message);
+  $("#btnOrderInstagram").onclick = () => window.open(STORE.instagramUrl, "_blank", "noreferrer");
+  $("#btnOrderPhone").onclick = () => (window.location.href = `tel:${STORE.phoneE164}`);
+
+  $("#modalOverlay").classList.remove("hidden");
+  $("#modalOverlay").classList.add("flex");
+  document.body.style.overflow = "hidden";
+}
+
+function closeProductModal() {
+  $("#modalOverlay").classList.add("hidden");
+  $("#modalOverlay").classList.remove("flex");
+  document.body.style.overflow = "";
+  state.activeProductId = null;
+}
+
+function openCart() {
+  $("#cartOverlay").classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+
+function closeCart() {
+  $("#cartOverlay").classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+/**
+ * =========================================================
+ * EVENTS
+ * =========================================================
+ */
+function bindEvents() {
+  // Theme
+  $("#btnTheme").addEventListener("click", () => setTheme(state.theme === "dark" ? "light" : "dark"));
+
+  // Search (desktop + mobile)
+  const onSearch = (value) => {
+    state.query = value;
+    $("#btnClearSearch").classList.toggle("hidden", !value);
+    renderProducts();
+  };
+
+  $("#searchInput").addEventListener("input", (e) => onSearch(e.target.value));
+  $("#searchInputMobile").addEventListener("input", (e) => onSearch(e.target.value));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      if (!$("#modalOverlay").classList.contains("hidden")) closeProductModal();
+      if (!$("#cartOverlay").classList.contains("hidden")) closeCart();
+      $("#searchInput").value = "";
+      $("#searchInputMobile").value = "";
+      state.query = "";
+      $("#btnClearSearch").classList.add("hidden");
+      renderProducts();
+    }
+  });
+
+  $("#btnClearSearch").addEventListener("click", () => {
+    $("#searchInput").value = "";
+    $("#searchInputMobile").value = "";
+    state.query = "";
+    $("#btnClearSearch").classList.add("hidden");
+    renderProducts();
+  });
+
+  // Language
+  const syncLangSelects = (v) => {
+    $("#langSelect").value = v;
+    $("#langSelectMobile").value = v;
+  };
+  $("#langSelect").addEventListener("change", (e) => {
+    syncLangSelects(e.target.value);
+    setLang(e.target.value);
+  });
+  $("#langSelectMobile").addEventListener("change", (e) => {
+    syncLangSelects(e.target.value);
+    setLang(e.target.value);
+  });
+
+  // Currency
+  const syncCurrencySelects = (v) => {
+    $("#currencySelect").value = v;
+    $("#currencySelectMobile").value = v;
+  };
+  $("#currencySelect").addEventListener("change", (e) => {
+    syncCurrencySelects(e.target.value);
+    setCurrency(e.target.value);
+  });
+  $("#currencySelectMobile").addEventListener("change", (e) => {
+    syncCurrencySelects(e.target.value);
+    setCurrency(e.target.value);
+  });
+
+  // Sort
+  $("#sortSelect").addEventListener("change", (e) => {
+    state.sort = e.target.value;
+    LS.set("sort", state.sort);
+    renderProducts();
+  });
+
+  // Reset
+  const resetAll = () => {
+    state.query = "";
+    state.category = "all";
+    state.sort = "featured";
+    LS.set("category", state.category);
+    LS.set("sort", state.sort);
+    $("#searchInput").value = "";
+    $("#searchInputMobile").value = "";
+    $("#sortSelect").value = state.sort;
+    toast(t("toastCleared"));
+    renderAll();
+  };
+  $("#btnReset").addEventListener("click", resetAll);
+  $("#btnEmptyReset").addEventListener("click", resetAll);
+
+  // Compact toggle
+  $("#btnToggleCompact").addEventListener("click", () => {
+    state.compact = !state.compact;
+    LS.set("compact", state.compact);
+    renderAll();
+  });
+
+  // Modals
+  $("#btnCloseModal").addEventListener("click", closeProductModal);
+  $("#modalOverlay").addEventListener("click", (e) => {
+    if (e.target === $("#modalOverlay")) closeProductModal();
+  });
+
+  // Cart open/close
+  $("#btnOpenCart").addEventListener("click", openCart);
+  $("#btnOpenCartTop").addEventListener("click", openCart);
+  $("#btnCloseCart").addEventListener("click", closeCart);
+  $("#cartBackdrop").addEventListener("click", closeCart);
+
+  // Checkout actions
+  $("#btnCheckoutInstagram").addEventListener("click", () => window.open(STORE.instagramUrl, "_blank", "noreferrer"));
+  $("#btnCheckoutPhone").addEventListener("click", () => (window.location.href = `tel:${STORE.phoneE164}`));
+
+  $("#btnCheckoutTelegram").addEventListener("click", () => {
+    const items = Object.entries(state.cart)
+      .map(([id, qty]) => {
+        const p = PRODUCTS.find((x) => x.id === id);
+        return p ? { name: getProductName(p), qty, priceUZS: p.priceUZS } : null;
+      })
+      .filter(Boolean);
+
+    if (items.length === 0) {
+      toast(t("cartEmpty"));
+      return;
+    }
+    const msg = buildOrderMessage(items, "Cart checkout");
+    openTelegramWithText(msg);
+  });
+
+  // Quick order from hero
+  $("#btnQuickOrder").addEventListener("click", () => {
+    openCart();
+    if (cartCount() === 0) {
+      // Suggest a top featured item
+      const top = PRODUCTS.find((p) => p.featured) || PRODUCTS[0];
+      addToCart(top.id);
+    }
+  });
+
+  // Deal scroll
+  $("#btnDealScroll").addEventListener("click", () => {
+    document.getElementById("products").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  // Wishlist button: show wishlist-only view quickly
+  $("#btnWishlist").addEventListener("click", () => {
+    const wished = Object.keys(state.wishlist);
+    if (wished.length === 0) {
+      toast(t("wishlist") + ": 0");
+      return;
+    }
+    state.category = "all";
+    state.query = ""; // keep it clean
+    LS.set("category", state.category);
+    $("#searchInput").value = "";
+    $("#searchInputMobile").value = "";
+    renderCategories();
+
+    // temporary filter by swapping query behavior:
+    const originalFilter = filteredProducts;
+    // render cards of wishlist only
+    const items = PRODUCTS.filter((p) => state.wishlist[p.id]);
+    $("#resultsMeta").textContent = t("wishlist") + ": " + items.length;
+
+    const grid = $("#productGrid");
+    const empty = $("#emptyState");
+    grid.innerHTML = "";
+    empty.classList.add("hidden");
+    for (const p of items) {
+      const inWish = true;
+      const qty = state.cart[p.id] || 0;
+      const stock = stockPill(p);
+
+      const card = document.createElement("div");
+      card.className =
+        "group overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900";
+
+      card.innerHTML = `
+        <div class="relative">
+          <img src="${escapeHtml(p.image)}" alt="${escapeHtml(getProductName(p))}" class="${state.compact ? "h-44" : "h-52"} w-full object-cover" loading="lazy">
+          <div class="absolute left-3 top-3 flex flex-wrap items-center gap-2">
+            ${p.badge ? `<span class="rounded-full bg-zinc-900 px-3 py-1 text-xs font-semibold text-white dark:bg-white dark:text-zinc-900">${escapeHtml(p.badge)}</span>` : ""}
+            <span class="rounded-full border px-3 py-1 text-xs font-semibold ${stock.cls}">${escapeHtml(stock.text)}</span>
+          </div>
+          <button class="btnWish absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-200 bg-white/90 backdrop-blur hover:bg-white dark:border-zinc-800 dark:bg-zinc-950/80" aria-label="Wishlist" data-id="${escapeHtml(p.id)}">
+            <span class="text-rose-600">${ICONS.heart}</span>
+          </button>
+        </div>
+
+        <div class="${state.compact ? "p-4" : "p-5"}">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <div class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">${escapeHtml(categoryLabel(p.category))}</div>
+              <div class="mt-1 text-lg font-semibold tracking-tight">${escapeHtml(getProductName(p))}</div>
+            </div>
+            <div class="text-right">
+              <div class="text-lg font-semibold">${escapeHtml(displayPrice(p.priceUZS))}</div>
+              <div class="text-xs text-zinc-500 line-through">${p.oldPriceUZS ? escapeHtml(displayPrice(p.oldPriceUZS)) : ""}</div>
+            </div>
+          </div>
+
+          <p class="mt-2 line-clamp-2 text-sm text-zinc-700 dark:text-zinc-300">${escapeHtml(getProductDesc(p))}</p>
+
+          <div class="mt-4 flex items-center gap-2">
+            <button class="btnAdd inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-zinc-900 px-4 py-3 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50 dark:bg-white dark:text-zinc-900" data-id="${escapeHtml(p.id)}" ${p.stock <= 0 ? "disabled" : ""}>
+              ${ICONS.plus}<span>${escapeHtml(t("add"))}${qty ? ` • ${qty}` : ""}</span>
+            </button>
+            <button class="btnDetails inline-flex items-center justify-center rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-900" data-id="${escapeHtml(p.id)}">
+              <span>${escapeHtml(t("details"))}</span>
+            </button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    }
+
+    grid.querySelectorAll(".btnAdd").forEach((btn) =>
+      btn.addEventListener("click", (e) => addToCart(e.currentTarget.dataset.id))
+    );
+    grid.querySelectorAll(".btnDetails").forEach((btn) =>
+      btn.addEventListener("click", (e) => openProductModal(e.currentTarget.dataset.id))
+    );
+    grid.querySelectorAll(".btnWish").forEach((btn) =>
+      btn.addEventListener("click", (e) => toggleWishlist(e.currentTarget.dataset.id))
+    );
+
+    document.getElementById("products").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  // Mobile menu
+  $("#btnMobileMenu").addEventListener("click", () => {
+    $("#mobileMenu").classList.toggle("hidden");
+  });
+
+  // Header nav anchors close menu
+  ["#navProducts", "#navServices", "#navLocation", "#navFAQ"].forEach((id) => {
+    document.querySelector(id).addEventListener("click", () => $("#mobileMenu").classList.add("hidden"));
+  });
+}
+
+/**
+ * =========================================================
+ * INIT
+ * =========================================================
+ */
+function init() {
+  // Defaults
+  $("#langSelect").value = state.lang;
+  $("#langSelectMobile").value = state.lang;
+  $("#currencySelect").value = state.currency;
+  $("#currencySelectMobile").value = state.currency;
+  $("#sortSelect").value = state.sort;
+
+  setTheme(state.theme === "dark" ? "dark" : "light");
+  hydrateText();
+  bindEvents();
+  renderAll();
+}
+
+init();
